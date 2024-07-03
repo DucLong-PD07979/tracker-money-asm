@@ -1,0 +1,14 @@
+@mixin transition($property: "all", $duration, $typeRun: "linear") {
+    -webkit-transition: $property $duration $typeRun;
+    -moz-transition: $property $duration $typeRun;
+    -ms-transition: $property $duration $typeRun;
+    -o-transition: $property $duration $typeRun;
+    transition: $property $duration $typeRun;
+    @content;
+}
+
+@mixin reponsive($breakPoint) {
+    @media only screen and (max-width: $breakPoint) {
+        @content;
+    }
+}

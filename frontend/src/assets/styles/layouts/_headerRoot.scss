@@ -1,0 +1,29 @@
+#header-root {
+    height: 80px;
+    line-height: 80px;
+}
+
+.header-root-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .header-logo {
+        margin: 0;
+        &__link {
+            font-size: 3.6rem;
+            color: $color-first-100;
+        }
+    }
+
+    .header-menu__list {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        & li a {
+            font-size: 1.6rem;
+            color: $color-first-80;
+            text-transform: capitalize;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+#footer-root {
+    border-top: 1px solid #f0f0f0;
+
+    .footer-inner__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 90px;
+    }
+}

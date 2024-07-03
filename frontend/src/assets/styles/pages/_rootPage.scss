@@ -1,0 +1,99 @@
+@import "../layouts/headerRoot";
+@import "../layouts/footerRoot";
+@import "../components/grid";
+
+.hero-banner {
+    padding: 0 22%;
+    padding-top: 100px;
+    .hero-banner__title {
+        font-size: 6.4rem;
+        font-weight: 500;
+        text-align: center;
+        margin: 0;
+        color: $color-secondary-100;
+    }
+
+    .hero-banner__title-wrapper {
+        display: flex;
+        align-items: center;
+        font-size: 6.4rem;
+        font-weight: 300;
+        margin: 0 0 50px 0;
+        line-height: 1.2;
+        color: $color-first-90;
+
+        .hero-banner__title {
+            font-size: 6.4rem;
+            font-weight: 500;
+            text-align: center;
+            margin: 0;
+            margin-left: 8px;
+            color: $color-secondary-100;
+        }
+    }
+
+    .hero-banner__action {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        & .btn {
+            background-color: $color-secondary-100;
+            font-weight: 500;
+            color: $color-first-10;
+            letter-spacing: 1.3px;
+        }
+
+        & .btn:hover {
+            background-color: $color-secondary-90;
+        }
+    }
+}
+
+.card-introduce__wrapper {
+    margin-top: 80px;
+    margin-bottom: 150px;
+
+    .card-introduce__box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: $color-secondary-10;
+        border-radius: 4px;
+        padding: 26px;
+
+        & img {
+            width: 50px;
+            height: 50px;
+        }
+
+        & h3 {
+            margin-top: 16px;
+            margin-bottom: 0;
+            color: $color-first-90;
+        }
+    }
+}
+
+.introduce-section {
+    padding: 50px;
+
+    .introduce-section__gird {
+        padding: 0 8%;
+        align-items: center;
+    }
+
+    & img {
+        width: 100%;
+        box-shadow: 0 0 2px #dadada;
+        border-radius: 12px;
+        max-height: 360px;
+    }
+
+    &__short {
+        h3 {
+            font-size: 2.6rem;
+        }
+    }
+}
