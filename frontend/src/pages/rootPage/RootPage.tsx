@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui";
 import { Grid } from "@/components/ui";
+import PageRouters from "@/enum/routers/routers";
 import { FooterRoot } from "@/layouts/footer";
 import { HeaderRoot } from "@/layouts/header";
+import { useNavigate } from "react-router-dom";
 
 interface heroCardDataType {
     image: string;
@@ -16,7 +18,6 @@ interface shortIntroduceType {
 }
 
 const RootPage = () => {
-    
     const heroCardData: heroCardDataType[] = [
         {
             image: "https://moneylover.me/img/introfeature/1.svg",
@@ -60,6 +61,11 @@ const RootPage = () => {
         },
     ];
 
+    const navigate = useNavigate();
+    const handleGoToRegister = () => {
+        return navigate(PageRouters.REGISTER);
+    };
+
     return (
         <div>
             <HeaderRoot></HeaderRoot>
@@ -75,11 +81,12 @@ const RootPage = () => {
                         </h1>
                     </div>
                     <div className="hero-banner__action">
-                        <Button size="xl" rounder="sm">
-                            Login
-                        </Button>
-                        <Button size="xl" rounder="sm">
-                            Register
+                        <Button
+                            size="xl"
+                            rounder="sm"
+                            onClick={() => handleGoToRegister()}
+                        >
+                            Sign in or create an account
                         </Button>
                     </div>
                 </div>

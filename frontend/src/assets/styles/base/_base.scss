@@ -2,6 +2,7 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    border-color: #e5e7eb;
 }
 
 h1,
@@ -77,4 +78,9 @@ img {
 
 .container-full {
     width: 100%;
+}
+
+.start-icon{
+    display: flex;
+    justify-content: center;
 }

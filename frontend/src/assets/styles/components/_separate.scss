@@ -1,0 +1,26 @@
+.separate-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.separate-container.vertical {
+    flex-direction: column;
+}
+
+.separate {
+    flex-grow: 1;
+}
+
+.separate-children {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+}
+
+.separate-container.vertical .separate-children {
+    padding: 8px 0;
+}

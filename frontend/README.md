@@ -1,3 +1,9 @@
+# Tham khảo từ:
+  UI:
+  - [moneylover](https://moneylover.me/)
+  - [loginPage](https://app.wordtune.com/)
+  Tài liệu:
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

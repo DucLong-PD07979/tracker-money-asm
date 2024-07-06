@@ -41,7 +41,7 @@ const Button: FC<ButtonProps> = ({
         >
             {isLoading && <span className="spinner"></span>}
             {icon && <span className="btn-icon">{icon}</span>}
-            <span className="btn-text">{children}</span>
+            {children}
         </button>
     );
 };

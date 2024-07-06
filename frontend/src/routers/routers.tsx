@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, Suspense } from "react";
 
 import PageRouters from "@/enum/routers/routers";
 import RootPage from "@/pages/rootPage/RootPage";
@@ -7,6 +7,7 @@ import { DefaultLayout } from "@/layouts";
 import PrivateRouter from "./privateRouter/PrivateRouter";
 
 const Profile = lazy(() => import("../pages/profile/Profile"));
+const Register = lazy(() => import("../pages/register/Register"));
 
 const ROUTER_LAYOUT_NONE = "none";
 const ROUTER_LAYOUT_DEFAULT = "default";
@@ -17,15 +18,29 @@ const ROUTER_ROLE_PRIVATE = "private";
 const routerDataWithLayout = [
     {
         path: PageRouters.HOME_ROOT,
-        element: <RootPage />,
+        element: (
+            <Suspense fallback="loading...">
+                <RootPage />
+            </Suspense>
+        ),
         layout: ROUTER_LAYOUT_NONE,
         role: ROUTER_ROLE_PUBLIC,
     },
     {
         path: PageRouters.HOME_PAGE,
-        element: <Profile />,
+        element: (
+            <Suspense fallback="loading...">
+                <Profile />
+            </Suspense>
+        ),
         layout: ROUTER_LAYOUT_DEFAULT,
         role: ROUTER_ROLE_PRIVATE,
+    },
+    {
+        path: PageRouters.REGISTER,
+        element: <Register />,
+        layout: ROUTER_LAYOUT_NONE,
+        role: ROUTER_ROLE_PUBLIC,
     },
 ];
 
