@@ -22,8 +22,11 @@
         gap: 24px;
         & li a {
             font-size: 1.6rem;
-            color: $color-first-80;
+            color: $color-secondary-100;
             text-transform: capitalize;
+            &:hover {
+                color: $color-first-80;
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border-color: #e5e7eb;
+    border-color: $borderColor-100;
 }
 
 h1,
@@ -80,7 +80,7 @@ img {
     width: 100%;
 }
 
-.start-icon{
+.start-icon {
     display: flex;
     justify-content: center;
 }

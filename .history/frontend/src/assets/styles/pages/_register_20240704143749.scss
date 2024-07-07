@@ -1,0 +1,89 @@
+.register-app-wrapper {
+    background-color: $color-first-20;
+    position: fixed;
+    inset: 0;
+
+    .logo-wrapper {
+        position: absolute;
+        left: 60px;
+        top: 20px;
+        font-size: 3rem;
+        font-weight: 600;
+        a {
+            color: $color-first-80;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.register-form {
+    .inner-form-container {
+        max-width: 390px;
+        width: 100%;
+        position: absolute;
+        left: 50%;
+        height: 100%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+        }
+
+        .recomment {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: $color-first-80;
+            margin-bottom: 10px;
+            span {
+                color: $color-secondary-80;
+            }
+        }
+
+        .method-register-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            width: 320px;
+            margin: 0 auto;
+        }
+        .btn-register {
+            min-width: 200px;
+            width: 100%;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 1.6rem;
+            font-weight: 500;
+            border: 2px solid #e5e7eb;
+            justify-content: space-between;
+            display: flex;
+            color: $color-first-80;
+            background-color: #f5f6f6;
+
+            &:hover {
+                background-color: #393b400a;
+            }
+        }
+        .register-with-email {
+            width: 100%;
+            .btn-register {
+                justify-content: center;
+            }
+        }
+
+        .register-note {
+            margin-top: 100px;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: $color-secondary-70;
+        }
+    }
+}

@@ -1,10 +1,14 @@
 #footer-root {
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid $borderColor-100;
 
     .footer-inner__wrapper {
         display: flex;
         align-items: center;
         justify-content: space-between;
         height: 90px;
+    }
+
+    .footer-inner__license {
+        color: $color-secondary-80;
     }
 }

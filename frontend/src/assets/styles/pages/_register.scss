@@ -1,5 +1,5 @@
 .register-app-wrapper {
-    background-color: $color-first-20;
+    background-color: $color-fourth-100;
     position: fixed;
     inset: 0;
 
@@ -10,7 +10,7 @@
         font-size: 3rem;
         font-weight: 600;
         a {
-            color: $color-first-80;
+            color: $color-first-100;
             &:hover {
                 text-decoration: underline;
             }
@@ -35,15 +35,16 @@
         h1 {
             font-size: 2.6rem;
             font-weight: 500;
+            color: $color-first-90;
         }
 
         .recomment {
             font-size: 1.4rem;
             font-weight: 600;
-            color: $color-first-80;
+            color: $color-secondary-100;
             margin-bottom: 10px;
             span {
-                color: $color-secondary-80;
+                color: $color-third-100;
             }
         }
 
@@ -63,17 +64,17 @@
             border-radius: 8px;
             font-size: 1.6rem;
             font-weight: 500;
-            border: 2px solid #e5e7eb;
+            border: 2px solid $borderColor-90;
             justify-content: space-between;
             display: flex;
-            color: $color-first-80;
-            background-color: #f5f6f6;
+            color: $color-secondary-100;
+            background-color: $color-fourth-100;
 
             &:hover {
-                background-color: #393b400a;
+                background-color: $color-hover-100;
             }
         }
-        
+
         .register-with-email {
             width: 320px;
             .btn-register {
@@ -82,10 +83,16 @@
         }
 
         .register-note {
-            margin-top: 100px;
+            margin-top: 70px;
             font-size: 1.2rem;
             font-weight: 400;
-            color: $color-first-80;
+            color: $color-secondary-80;
+
+            a {
+                color: $color-secondary-80;
+                text-decoration: underline;
+                margin: 0 2px;
+            }
         }
     }
 }

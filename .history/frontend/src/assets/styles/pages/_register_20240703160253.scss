@@ -1,0 +1,11 @@
+.register-app-wrapper {
+    background-color: $color-first-20;
+    position: fixed;
+    inset: 0;
+}
+
+.inner-form-container{
+    max-width: 300px;
+    background-color: $color-failed;
+    transform: translateX(-50%);
+}

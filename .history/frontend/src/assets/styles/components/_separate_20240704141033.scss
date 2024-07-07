@@ -1,0 +1,23 @@
+.separate-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.separate-container.vertical {
+    flex-direction: column;
+}
+
+.separate {
+    flex-grow: 1;
+}
+
+.separate-children {
+    padding: 0 8px;
+}
+
+.separate-container.vertical .separate-children {
+    padding: 8px 0;
+}

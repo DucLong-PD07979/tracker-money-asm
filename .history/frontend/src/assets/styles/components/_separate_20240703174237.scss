@@ -1,0 +1,10 @@
+.separate-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .separate {
+        border: 1px solid $color-first-80;
+        width: 100%;
+    }
+}

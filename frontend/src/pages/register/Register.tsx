@@ -88,8 +88,9 @@ const Register = () => {
                             </form>
                         </div>
                         <p className="register-note">
-                            By signing up, you agree to the Terms and Conditions
-                            and Privacy Policy.
+                            By signing up, you agree to the
+                            <a href="">Terms and Conditions</a>
+                            and<a href="">Privacy Policy.</a>
                         </p>
                     </div>
                 </div>
