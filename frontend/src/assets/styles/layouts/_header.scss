@@ -1,0 +1,22 @@
+.header-main {
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    right: 0;
+    padding-left: calc($siderbarsMain-width-close);
+}
+
+.header-main.siderbarOpen {
+    padding-left: calc($siderbarsMain-width-open);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $header-main-height;
+    border-bottom: 1px solid $borderColor-100;
+    background-color: $color-fourth-100;
+    padding-inline: $padding-global;
+}

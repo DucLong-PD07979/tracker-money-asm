@@ -1,0 +1,14 @@
+@import "./header";
+
+.main-content-container {
+    padding-left: calc($siderbarsMain-width-close);
+    margin-top: $header-main-height;
+}
+
+.main-content-container.siderBarOpen {
+    padding-left: calc($siderbarsMain-width-open);
+}
+
+.main-content-inner {
+    padding: $padding-global;
+}

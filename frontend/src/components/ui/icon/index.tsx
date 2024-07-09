@@ -96,4 +96,232 @@ const FaceBookIcon: FC<IconProps> = ({
     );
 };
 
-export { GoogleIcon, AppleIcon, FaceBookIcon };
+const CreditCardIcon: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const UserCircleIcon: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const ArrowsRightLeftIcon: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const FlagIcon: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const CursorArrowRipple: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672Zm-7.518-.267A8.25 8.25 0 1 1 20.25 10.5M8.288 14.212A5.25 5.25 0 1 1 17.25 10.5"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const QuestionMarkCircle: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                width={width}
+                height={height}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const ChevronLef: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 19.5 8.25 12l7.5-7.5"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const ChevronRight: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                width={width}
+                height={height}
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                />
+            </svg>
+        </div>
+    );
+};
+
+export {
+    GoogleIcon,
+    AppleIcon,
+    FaceBookIcon,
+    CreditCardIcon,
+    UserCircleIcon,
+    ArrowsRightLeftIcon,
+    FlagIcon,
+    CursorArrowRipple,
+    QuestionMarkCircle,
+    ChevronLef,
+    ChevronRight,
+};
