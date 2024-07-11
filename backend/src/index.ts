@@ -1,4 +1,7 @@
-const name: string = 'Dư Thanh Được'
-console.log(name)
+import app from './server'
+import { PORT_SERVER } from './configs/environment'
+const PORT = PORT_SERVER || 3000
 
-export const a = 'sss'
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
+})
