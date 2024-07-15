@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 import PageRouters from "@/enum/routers/routers";
 import RootPage from "@/pages/rootPage/RootPage";
@@ -8,6 +8,10 @@ import PrivateRouter from "./privateRouter/PrivateRouter";
 
 const Profile = lazy(() => import("../pages/profile/Profile"));
 const Register = lazy(() => import("../pages/register/Register"));
+const Budgets = lazy(() => import("../pages/budgets/Budgets"));
+const Transactions = lazy(() => import("../pages/transactions/Transactions"));
+const Reports = lazy(() => import("../pages/reports/Reports"));
+const Goals = lazy(() => import("../pages/goals/Goals"));
 
 const ROUTER_LAYOUT_NONE = "none";
 const ROUTER_LAYOUT_DEFAULT = "default";
@@ -38,9 +42,53 @@ const routerDataWithLayout = [
     },
     {
         path: PageRouters.REGISTER,
-        element: <Register />,
+        element: (
+            <Suspense fallback="loading...">
+                <Register />
+            </Suspense>
+        ),
         layout: ROUTER_LAYOUT_NONE,
         role: ROUTER_ROLE_PUBLIC,
+    },
+    {
+        path: PageRouters.BUDGETS,
+        element: (
+            <Suspense fallback="loading...">
+                <Budgets />
+            </Suspense>
+        ),
+        layout: ROUTER_LAYOUT_DEFAULT,
+        role: ROUTER_ROLE_PRIVATE,
+    },
+    {
+        path: PageRouters.TRANSACTIONS,
+        element: (
+            <Suspense fallback="loading...">
+                <Transactions />
+            </Suspense>
+        ),
+        layout: ROUTER_LAYOUT_DEFAULT,
+        role: ROUTER_ROLE_PRIVATE,
+    },
+    {
+        path: PageRouters.REPORTS,
+        element: (
+            <Suspense fallback="loading...">
+                <Reports />
+            </Suspense>
+        ),
+        layout: ROUTER_LAYOUT_DEFAULT,
+        role: ROUTER_ROLE_PRIVATE,
+    },
+    {
+        path: PageRouters.GOALS,
+        element: (
+            <Suspense fallback="loading...">
+                <Goals />
+            </Suspense>
+        ),
+        layout: ROUTER_LAYOUT_DEFAULT,
+        role: ROUTER_ROLE_PRIVATE,
     },
 ];
 
