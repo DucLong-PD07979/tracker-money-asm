@@ -29,22 +29,23 @@ const SiderBarsMain = () => {
             icon: <UserCircleIcon height="20" width="20" />,
         },
         {
-            path: PageRouters.BUDGETS,
-            label: "Bills & Payments",
-            icon: <CreditCardIcon height="20" width="20" />,
-        },
-        {
-            path: PageRouters.REGISTER,
+            path: PageRouters.TRANSACTIONS,
             label: "Transactions",
             icon: <ArrowsRightLeftIcon height="20" width="20" />,
         },
         {
-            path: PageRouters.REGISTER,
+            path: PageRouters.BUDGETS,
+            label: "Budgets",
+            icon: <CreditCardIcon height="20" width="20" />,
+        },
+
+        {
+            path: PageRouters.REPORTS,
             label: "Reports",
             icon: <FlagIcon height="20" width="20" />,
         },
         {
-            path: PageRouters.REGISTER,
+            path: PageRouters.GOALS,
             label: "Goals",
             icon: <CursorArrowRipple height="20" width="20" />,
         },
