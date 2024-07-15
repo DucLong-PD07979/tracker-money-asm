@@ -312,6 +312,141 @@ const ChevronRight: FC<IconProps> = ({
     );
 };
 
+const ScaleIcon: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                width={width}
+                height={height}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const ArrowRightStartOnRectangle: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                width={width}
+                height={height}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const ArrowTrendUp: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+                />
+            </svg>
+        </div>
+    );
+};
+
+const PlusIcon: FC<IconProps> = ({
+    width = "24px",
+    height = "24px",
+    classNames = "",
+    style = {},
+}) => {
+    return (
+        <div className={`start-icon ${classNames}`} style={style}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                height={height}
+                width={width}
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                />
+            </svg>
+        </div>
+    );
+};
+
+// const ArrowTrendUp: FC<IconProps> = ({
+//     width = "24px",
+//     height = "24px",
+//     classNames = "",
+//     style = {},
+// }) => {
+//     return (
+//         <div className={`start-icon ${classNames}`} style={style}>
+//             <svg
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 fill="none"
+//                 viewBox="0 0 24 24"
+//                 strokeWidth="1.5"
+//                 stroke="currentColor"
+//                 height={height}
+//                 width={width}
+//             >
+//                 <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+//                 />
+//             </svg>
+//         </div>
+//     );
+// };
+
 export {
     GoogleIcon,
     AppleIcon,
@@ -324,4 +459,8 @@ export {
     QuestionMarkCircle,
     ChevronLef,
     ChevronRight,
+    ScaleIcon,
+    ArrowRightStartOnRectangle,
+    ArrowTrendUp,
+    PlusIcon,
 };
