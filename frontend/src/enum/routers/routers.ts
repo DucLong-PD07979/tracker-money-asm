@@ -3,9 +3,10 @@ enum PageRouters {
     HOME_PAGE = "/profile",
     REGISTER = "/register",
     LOGIN = "login",
-    DASHBOARD = "/dashboard",
     BUDGETS = "/budgets",
-    EDIT_BUDGETS = "/budgets/:id/edit",
+    TRANSACTIONS = "/transactions",
+    REPORTS = "/reports",
+    GOALS = "/goals",
 
     ERROR_404_PAGE = "/page-error-404",
     ERROR_405_PAGE = "/page-error-500",
