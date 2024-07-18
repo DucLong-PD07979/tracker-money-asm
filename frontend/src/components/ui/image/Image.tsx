@@ -5,7 +5,7 @@ interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     alt: string;
     src: string;
     defaultImg: string;
-    additionalClassNames: string;
+    additionalClassNames?: string;
 }
 
 const Image: FC<ImageProps> = ({
