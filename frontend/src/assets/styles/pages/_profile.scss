@@ -1,0 +1,57 @@
+.profile-wrapper {
+    .profile-inner-container {
+        // max-width: 1000px;
+        // height: 500px;
+        // margin: 30px auto;
+    }
+}
+
+.new-transaction-wrapper {
+    margin-top: 26px;
+    margin-bottom: 120px;
+
+    .new-transaction__header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .new-transaction__header-btn {
+            text-transform: capitalize;
+            padding: 8px 26px;
+            font-size: 1.4rem;
+            background-color: $color-fourth-100;
+            border: 1px solid $color-fourth-100;
+
+            &.active {
+                background-color: $color-fourth-80;
+                border: 1px solid $borderColor-100;
+                color: $color-first-80;
+            }
+
+            &:hover {
+                background-color: $color-hover-100;
+            }
+        }
+    }
+
+    .new-transaction__content {
+        .form-wrapper {
+            margin-top: 44px;
+        }
+
+        .btn-submit {
+            border-radius: 4px;
+            margin-top: 20px;
+            color: $color-fourth-100;
+            background-color: $color-first-100;
+
+            &:hover {
+                background-color: $color-first-80;
+            }
+        }
+    }
+}
+
+.recent-content-wrapper{
+    margin-top: 26px;
+}
