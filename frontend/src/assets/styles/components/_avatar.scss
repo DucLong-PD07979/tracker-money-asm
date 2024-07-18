@@ -1,0 +1,10 @@
+.avatar-box {
+    &.avatar-s-sm {
+        width: 36px;
+        height: 36px;
+    }
+
+    &.avatar-r-full {
+        border-radius: 999;
+    }
+}
