@@ -6,6 +6,7 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    color: $color-secondary-100;
 }
 
 .btn-sm {
@@ -14,6 +15,7 @@
 
 .btn-md {
     font-size: 1.4rem;
+    padding: 12px;
 }
 
 .btn-xl {
@@ -65,7 +67,7 @@
 }
 
 .btn-icon {
-    margin-right: 0.5rem;
+    margin-right: 6px;
 }
 .btn-text {
     display: inline-block;
