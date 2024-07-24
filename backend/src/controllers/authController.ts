@@ -135,23 +135,24 @@ const authLogout = async (req: Request, res: Response) => {
 };
 
 const authRefreshToken = async (req: Request, res: Response) => {
-  //   try {
-  //     const refreshToken = req.cookies?.[REFRESH_COOKIE_NAME];
-  //     if (!refreshToken) {
-  //       res.status(401).json('Error cookie');
-  //     }
-  //     const decoded = await getVerifyToken(refreshToken, REFRESH_TOKEN_KEY!);
-  //     if (decoded) {
-  //       const tokenLifeTime = Math.floor(Date.now() / 1000) + 50000000;
-  //       const accessToken = generateAccessToken(tokenLifeTime, decoded.userData);
-  //       return res.status(StatusCodes.OK).json({
-  //         accessToken,
-  //         usercurrent: decoded.userData
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  try {
+    const refreshToken = req.cookies?.[REFRESH_COOKIE_NAME];
+    if (!refreshToken) {
+      res.status(StatusCodes.UNAUTHORIZED).json('Error cookie');
+    }
+    const decoded = await getVerifyToken(refreshToken, REFRESH_TOKEN_KEY!);
+    if (decoded) {
+      const accessToken = generateAccessToken(decoded.userData);
+      return res.status(StatusCodes.OK).json({
+        accessToken,
+        usercurrent: decoded.userData
+      });
+    } else {
+      return res.status(StatusCodes.UNAUTHORIZED).json('Invalid token');
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const authWithGoogle = (req: Request, res: Response, next: NextFunction) => {

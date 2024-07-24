@@ -90,13 +90,16 @@ const generateRrefreshToken = (data: any) => {
   return tokenRefresh;
 };
 
-const getVerifyToken = (token: string, keytoken: string) => {
+interface DecodedToken {
+  userData: IUser;
+}
+const getVerifyToken = (token: string, keytoken: string): Promise<DecodedToken> => {
   return new Promise((res, rej) => {
     jwt.verify(token, keytoken, function (err, decoded) {
       if (err) {
         rej(err);
       } else {
-        res(decoded);
+        res(decoded as DecodedToken);
       }
     });
   });
