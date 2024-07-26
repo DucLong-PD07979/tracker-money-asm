@@ -22,6 +22,7 @@ const Button: FC<ButtonProps> = ({
     ariaLabel,
     isLoading = false,
     icon,
+    ...props
 }) => {
     const btnStyle = classNames(
         `btn`,
@@ -38,6 +39,7 @@ const Button: FC<ButtonProps> = ({
             role="button"
             aria-label={ariaLabel}
             disabled={disabled}
+            {...props}
         >
             {isLoading && <span className="spinner"></span>}
             {icon && <span className="btn-icon">{icon}</span>}
