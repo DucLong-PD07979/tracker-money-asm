@@ -1,0 +1,35 @@
+.popover-wrapper {
+    background-color: $color-fourth-100 !important;
+    box-shadow: $boxShadowColor-100;
+}
+
+.popover-wrapper ul > li {
+    display: flex;
+    padding: 8px 4px;
+    min-width: 120px;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: $color-first-80;
+
+        & > button {
+            color: $color-fourth-100;
+        }
+    }
+}
+
+.popover-wrapper ul > li button {
+    font-size: 1.6rem;
+    padding: 0;
+    color: $color-secondary-90;
+    cursor: pointer;
+    width: 100%;
+    justify-content: left;
+    background-color: transparent;
+}
+
+.popover-wrapper .tippy-arrow {
+    color: $color-fourth-100 !important;
+}
