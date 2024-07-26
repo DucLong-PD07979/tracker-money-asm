@@ -8,8 +8,17 @@
 @import "./components/button";
 @import "./components/separate";
 @import "./components/siderbars-main";
+@import "./components/sectionWrapper";
+@import "./components/form/form-setup";
+@import "./components/table";
+@import "./components/avatar";
+@import "./components/popover";
 
 @import "./layouts/defaultLayout";
 
+@import "./services/tippy";
+
 @import "./pages/rootPage";
 @import "./pages/register";
+@import "./pages/profile";
+@import "./pages/budgets";
