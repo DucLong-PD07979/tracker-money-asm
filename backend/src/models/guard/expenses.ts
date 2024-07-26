@@ -6,6 +6,7 @@ interface Expenses extends Document {
   amount: number;
   id_cate_expenses: Types.ObjectId;
   is_paid: boolean;
+  user_id: Types.ObjectId;
   description: string;
   duration: string;
   currency_code: string;

@@ -12,10 +12,12 @@ const createBudgetCate = async (budgetCateReq: budgetReq) => {
   try {
     const budgetCate = new BudgetCateModel(budgetCateReq);
     await budgetCate.save();
+    const monthNow = getMonth(new Date());
+    const yearNow = getYear(new Date());
 
     await BudgetsModel.updateOne(
-      { _id: '669f71c3dca0079c65382224' },
-      { $push: { 'budgets.2024.month.July.budgetCategories': budgetCate._id } }
+      { [`budgets.${yearNow}.year`]: yearNow },
+      { $push: { [`budgets.${yearNow}.month.${monthArr[monthNow].value}.budgetCategories`]: budgetCate._id } }
     );
 
     return budgetCate;

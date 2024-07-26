@@ -2,18 +2,19 @@ import BudgetsModel from '@/models/budgetsModel';
 import { monthArr } from '@/utils/helper/dateHelper';
 import { getMonth, getYear } from 'date-fns';
 
-type budgetReq = {
-  amountYear: 120000;
-  amountMonth: 10000;
+type budgetPayload = {
+  amountYear: number;
+  amountMonth: number;
+  user_id: string;
 };
 
-const createYearBudget = async (budgetReq: budgetReq) => {
+const createYearBudget = async (budgetPayload: budgetPayload) => {
   try {
-    const { amountYear, amountMonth } = budgetReq;
-    const yearNow = getYear(new Date());
+    const { amountYear, amountMonth, user_id } = budgetPayload;
+    const yearNow = getYear(new Date()) - 1;
     const monthNow = getMonth(new Date());
-    const budgetFliter = { [`budgets.${yearNow}`]: { $exists: true } };
-    const budget = await BudgetsModel.find(budgetFliter);
+    const budgetFliterWithUser_id = { [`budgets.${yearNow}.user_id`]: user_id };
+    const budget = await BudgetsModel.find(budgetFliterWithUser_id);
 
     let messages = 'bạn đã tạo chi phí cho năm 2024!';
     let isOk = false;
@@ -25,8 +26,10 @@ const createYearBudget = async (budgetReq: budgetReq) => {
       budgets: {
         [yearNow]: {
           amount: amountYear,
+          year: yearNow,
+          user_id,
           month: {
-            [monthArr[monthNow].label]: {
+            [monthArr[monthNow].value]: {
               amount: amountMonth
             }
           }
@@ -43,4 +46,15 @@ const createYearBudget = async (budgetReq: budgetReq) => {
   }
 };
 
-export { createYearBudget };
+const getBudgetWithUserId = async (user_id: any) => {
+  const yearNow = getYear(new Date());
+  const filter = { [`budgets.${yearNow}.user_id`]: user_id };
+  const budget = await BudgetsModel.find(filter).lean(true);
+  console.log(budget);
+  if (Array.isArray(budget) && budget.length > 0) {
+    return budget;
+  }
+  return [];
+};
+
+export { createYearBudget, getBudgetWithUserId };

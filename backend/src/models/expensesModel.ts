@@ -7,6 +7,7 @@ const expenseSchema = new Schema<Expense>(
     id_cate_expenses: { type: Schema.ObjectId, ref: 'categoriesexpenes', required: false },
     is_paid: { type: Boolean, required: false },
     description: { type: String, required: false },
+    user_id: { type: Schema.ObjectId, required: true },
     duration: { type: String, required: false },
     currency_code: { type: String, required: false, default: 'VND' }
   },

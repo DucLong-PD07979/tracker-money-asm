@@ -1,7 +1,9 @@
 import express from 'express';
-import createBudgets from '@/controllers/budgetController';
+import * as controllers from '@/controllers/budgetController';
+import { verifyToKen } from '@/middlewares/authMiddleware';
 
 const Router = express.Router();
 
-Router.post('/budgets', createBudgets);
+Router.post('/budgets', [verifyToKen], controllers.createBudgets);
+Router.get('/budgets', [verifyToKen], controllers.getBudgetWithUserId);
 export default Router;

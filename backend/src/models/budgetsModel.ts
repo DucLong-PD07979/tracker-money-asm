@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from 'mongoose';
-import { BudgetsDocument, YearlyBudget, MonthBudget } from './guard/budgets';
+import { BudgetsDocument, YearlyBudget } from './guard/budgets';
 
 const MonthBudgetSchema = new Schema({
   amount: { type: Number, required: true },
@@ -11,6 +11,8 @@ const YearlyBudgetSchema = new Schema<YearlyBudget>(
     amount: { type: Number, required: true },
     amount_actually: { type: Number, required: true, default: 0 },
     balance: { type: Number, required: false },
+    year: { type: Number, required: true },
+    user_id: { type: Schema.ObjectId, required: true },
     month: {
       type: Map,
       of: MonthBudgetSchema,

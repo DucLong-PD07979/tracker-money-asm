@@ -10,6 +10,8 @@ export interface YearlyBudget {
   amount: number;
   amount_actually: number;
   balance: number;
+  user_id: Types.ObjectId;
+  year: number;
   timestamps: SchemaTimestampsConfig;
   month: {
     [month: string]: MonthBudget;

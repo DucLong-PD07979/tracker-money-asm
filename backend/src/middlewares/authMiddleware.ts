@@ -12,6 +12,9 @@ const verifyToKen = async (req: Request, res: Response, next: NextFunction) => {
 
     const decoded: any = await getVerifyToken(token, TOKEN_KEY!);
     req.user = decoded.userData;
+    if (!decoded) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Token no verify');
+    }
     next();
   } catch (error) {
     console.log(error);
