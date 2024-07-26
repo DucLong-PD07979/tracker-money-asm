@@ -6,6 +6,7 @@ import { FC } from "react";
 interface Option {
     value: string;
     label: string;
+    _id: number;
 }
 
 interface SelectBoxProps {
@@ -22,7 +23,6 @@ const SelectBox: FC<SelectBoxProps> = ({
     control,
     selectValue,
     classNames,
-    errorMess,
 }) => {
     return (
         <Controller
@@ -37,12 +37,9 @@ const SelectBox: FC<SelectBoxProps> = ({
                             value={options.find(
                                 (option) => option.value === value
                             )}
-                            onChange={(val) => onChange(val?.value)}
+                            onChange={(val) => onChange(val?._id)}
                             options={options}
                         />
-                        {errorMess && (
-                            <span className="error">{errorMess}</span>
-                        )}
                     </>
                 );
             }}

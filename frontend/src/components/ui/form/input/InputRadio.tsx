@@ -6,6 +6,7 @@ interface InputRadioProps {
     rounder?: "xs" | "md" | "lg";
     placeholder?: string;
     classNames?: string;
+    value: string;
     refinput: React.DetailedHTMLProps<
         React.InputHTMLAttributes<HTMLInputElement>,
         HTMLInputElement
@@ -20,6 +21,7 @@ const InputRadio = forwardRef<HTMLInputElement, InputRadioProps>(
             refinput,
             rounder,
             classNames: additionalClassNames,
+            ...props
         },
         ref
     ) => {
@@ -38,6 +40,7 @@ const InputRadio = forwardRef<HTMLInputElement, InputRadioProps>(
                 className={inputStyle}
                 placeholder={placeholder}
                 {...refinput}
+                {...props}
             />
         );
     }
