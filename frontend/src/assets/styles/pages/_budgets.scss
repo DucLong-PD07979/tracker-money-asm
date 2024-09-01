@@ -1,0 +1,37 @@
+.budgets-inner {
+    .budget-menu-cotainer {
+
+        .budget-menu__link {
+            background-color: $color-fourth-80;
+            color: $color-secondary-100;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            font-weight: 500;
+
+            .box-link {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                & span.year-active {
+                    color: $color-fourth-100;
+                    padding: 2px 8px;
+                    background-color: $color-third-90;
+                    border-radius: 4px;
+                }
+
+                & span.year-label{
+                    background-color: $color-secondary-80;
+                    color: $color-fourth-100;
+                    padding: 2px 8px;
+                    border-radius: 4px;
+                }
+            }
+
+            &:hover {
+                background-color: $color-third-70;
+            }
+        }
+    }
+}
