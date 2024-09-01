@@ -16,6 +16,19 @@ th {
     padding-top: 0;
 }
 
-tbody tr:hover{
+tbody tr:hover {
     background-color: $color-hover-100;
+}
+
+.table-action-btn {
+    background-color: transparent;
+    padding: 6px;
+}
+
+.table-action-btn:hover.table-action-btn__edit {
+    color: $color-first-100;
+}
+
+.table-action-btn:hover.table-action-btn__remove {
+    color: $color-failed;
 }
