@@ -21,13 +21,18 @@ label {
     outline: 2px solid $color-first-80;
 }
 
+.input-form:disabled {
+    background-color: $color-secondary-70;
+    cursor: not-allowed;
+}
+
 .form-flex-cl {
     display: flex;
     flex-direction: column;
 }
 
 .error-mess {
-    color: $color-third-90;
+    color: $color-failed;
     margin-top: 4px;
 }
 
