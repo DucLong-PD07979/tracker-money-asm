@@ -1,17 +1,17 @@
 import classNames from "classnames";
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, ComponentPropsWithoutRef } from "react";
+import DotSpinner from "../loading/DotSpinner";
 
-interface ButtonProps {
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
     children: ReactNode;
     classNames?: string;
     size?: "sm" | "md" | "xl";
     rounder?: "sm" | "md" | "xl" | "none";
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
     isLoading?: boolean;
     icon?: ReactNode;
-    disabled?: boolean;
     ariaLabel?: string;
 }
+
 const Button: FC<ButtonProps> = ({
     children,
     classNames: additionalClassNames,
@@ -32,6 +32,13 @@ const Button: FC<ButtonProps> = ({
         },
         additionalClassNames
     );
+
+    const spinnerStyle = {
+        "--uib-size": "14px",
+        "--uib-color": "currentColor",
+        "--uib-speed": "1.5s",
+    };
+
     return (
         <button
             className={btnStyle}
@@ -41,7 +48,11 @@ const Button: FC<ButtonProps> = ({
             disabled={disabled}
             {...props}
         >
-            {isLoading && <span className="spinner"></span>}
+            {isLoading && (
+                <span className="btn-icon">
+                    <DotSpinner style={spinnerStyle as React.CSSProperties} />
+                </span>
+            )}
             {icon && <span className="btn-icon">{icon}</span>}
             {children}
         </button>
