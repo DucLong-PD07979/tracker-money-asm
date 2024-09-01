@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string, number, date } from "yup";
@@ -17,45 +16,24 @@ import { getAllCategoriesExpense } from "@/api/categoryExpenseApi";
 import { ExpensesType } from "@/api/models/expensesGuard";
 import { createExpenses } from "@/api/expensesApi";
 import { toast } from "react-toastify";
-
-// interface BudgetsOptionType {
-//     value: string;
-//     label: string;
-// }
-
-// const _budgetsTypeOption: BudgetsOptionType[] = [
-//     { value: "groceries", label: "Groceries" },
-//     { value: "electricity", label: "Electricity" },
-//     { value: "rent", label: "Rent" },
-//     { value: "education", label: "Education" },
-//     { value: "entertainment", label: "Entertainment" },
-//     { value: "shopping", label: "Shopping" },
-//     { value: "internet", label: "Internet" },
-//     { value: "healthcare", label: "Healthcare" },
-//     { value: "income", label: "Income" },
-//     { value: "another", label: "Another" },
-// ];
-
-interface CurrencyOptionType {
-    value: string;
-    label: string;
-    _id: number;
-}
-const _currencyOption: CurrencyOptionType[] = [
-    { value: "VND", label: "VND", _id: 123 },
-    { value: "USD", label: "USD", _id: 123 },
-    { value: "EUR", label: "EUR", _id: 123 },
-];
+import { formatCurrency } from "@/utils/helper/formatHelpler";
+import DotSpinner from "@/components/ui/loading/DotSpinner";
 
 const expensesSchema = object({
     id_expense_cate: string().required(),
-    amount: number().required(),
+    amount: number()
+        .required("Trường này không được bỏ trống")
+        .transform((value, originalValue) =>
+            originalValue.trim() === "" ? undefined : value
+        ),
     duration: date().default(() => new Date()),
-    // is_paid: boolean().default(false),
-    description: string().default(""),
-    currency_code: string().default("VND").required(),
+    is_paid: string().default("flase"),
+    description: string()
+        .required("Trường này không được bỏ trống")
+        .transform((value, originalValue) =>
+            originalValue.trim() === "" ? undefined : value
+        ),
 });
-
 const FormExpense = () => {
     const {
         control,
@@ -66,9 +44,6 @@ const FormExpense = () => {
     } = useForm<ExpensesType>({
         resolver: yupResolver(expensesSchema),
     });
-
-    const [currencyOption, setCurrencyOption] =
-        useState<CurrencyOptionType[]>(_currencyOption);
 
     const { isPending, data: cateExpenseData } = useQuery({
         queryKey: ["cate-expenses"],
@@ -94,7 +69,7 @@ const FormExpense = () => {
     };
 
     if (isPending) {
-        return "...loading!";
+        return <DotSpinner />;
     }
 
     const cateExpenseDefaultSelect =
@@ -124,24 +99,10 @@ const FormExpense = () => {
                             <label htmlFor="">Amount budgets</label>
                             <InputText
                                 refinput={register("amount")}
-                                placeholder="20.000.000 vnd"
+                                placeholder={formatCurrency(20000000)}
                             />
                             {errors.amount && (
                                 <ErrorMess>{errors.amount.message}</ErrorMess>
-                            )}
-                        </div>
-                        <div className="form-flex-cl">
-                            <label htmlFor="">Currency option</label>
-                            <SelectBox
-                                control={control}
-                                options={currencyOption}
-                                selectValue={"ss"}
-                                name={"currency_code"}
-                            />
-                            {errors.currency_code && (
-                                <ErrorMess>
-                                    {errors.currency_code.message}
-                                </ErrorMess>
                             )}
                         </div>
                         <div className="form-flex-cl">
@@ -155,37 +116,6 @@ const FormExpense = () => {
                             )}
                         </div>
                         <div className="form-flex-cl">
-                            <label htmlFor="">Paid</label>
-                            <Grid gap="18px" columnNumber={2}>
-                                <div>
-                                    <InputRadio
-                                        refinput={register("is_paid")}
-                                        placeholder="description expense month"
-                                        value="true"
-                                    />
-                                    <label
-                                        htmlFor=""
-                                        style={{ marginLeft: "4px" }}
-                                    >
-                                        Yes
-                                    </label>
-                                </div>
-                                <div>
-                                    <InputRadio
-                                        refinput={register("is_paid")}
-                                        placeholder="description expense month"
-                                        value="false"
-                                    />
-                                    <label
-                                        htmlFor=""
-                                        style={{ marginLeft: "4px" }}
-                                    >
-                                        No
-                                    </label>
-                                </div>
-                            </Grid>
-                        </div>
-                        <div className="form-flex-cl">
                             <label htmlFor="">Description</label>
                             <InputText
                                 refinput={register("description")}
@@ -197,11 +127,53 @@ const FormExpense = () => {
                                 </ErrorMess>
                             )}
                         </div>
+                        <div className="form-flex-cl">
+                            <label htmlFor="">Paid</label>
+                            <Grid gap="18px" columnNumber={2}>
+                                <div>
+                                    <InputRadio
+                                        refinput={register("is_paid")}
+                                        placeholder="description expense month"
+                                        value="true"
+                                        classNames="input-radio"
+                                        id="is_paid_true"
+                                    />
+                                    <label
+                                        htmlFor="is_paid_true"
+                                        style={{ marginLeft: "4px" }}
+                                    >
+                                        Yes
+                                    </label>
+                                </div>
+                                <div>
+                                    <InputRadio
+                                        refinput={register("is_paid")}
+                                        placeholder="description expense month"
+                                        value="false"
+                                        classNames="input-radio"
+                                        id="is_paid_false"
+                                        checked
+                                    />
+                                    <label
+                                        htmlFor="is_paid_false"
+                                        style={{
+                                            marginLeft: "4px",
+                                        }}
+                                    >
+                                        No
+                                    </label>
+                                </div>
+                            </Grid>
+                        </div>
                     </Grid>
                     <Button
                         classNames="btn-submit"
                         size="md"
-                        icon={<PlusIcon width="14px" height="14px" />}
+                        icon={
+                            !mutation.isPending && (
+                                <PlusIcon width="14px" height="14px" />
+                            )
+                        }
                     >
                         Create expenses
                     </Button>

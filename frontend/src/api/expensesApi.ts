@@ -7,4 +7,9 @@ const createExpenses = async (expensesPayload: any): Promise<any> => {
     return await apiBase.post(EXPENSES_URL, expensesPayload);
 };
 
-export { createExpenses };
+const getExpensesWithUserId = async (): Promise<any> => {
+    const result = await apiBase.get(EXPENSES_URL);
+    return result.data;
+};
+
+export { createExpenses, getExpensesWithUserId };
