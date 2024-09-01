@@ -9,6 +9,10 @@
     color: $color-secondary-100;
 }
 
+.btn:disabled {
+    cursor: not-allowed;
+}
+
 .btn-sm {
     font-size: 1.2rem;
 }
