@@ -1,4 +1,5 @@
 import ExpenseModel from '@/models/expensesModel';
+import { endOfMonth, startOfMonth, startOfYear, endOfYear, startOfDay, endOfDay } from 'date-fns';
 
 const createExpenses = async (expensesPayload: any) => {
   try {
@@ -10,4 +11,31 @@ const createExpenses = async (expensesPayload: any) => {
   }
 };
 
-export { createExpenses };
+const getExpensesWithUserId = async (id: any) => {
+  try {
+    const expenses = ExpenseModel.find({ user_id: id });
+    if (expenses) return expenses;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getExpensesFliterWithYear = async (id: any, year: string) => {
+  try {
+    const start = startOfYear(year);
+    const end = endOfYear(year);
+
+    const expensesYear = await ExpenseModel.find({
+      user_id: id,
+      duration: {
+        $gte: start,
+        $lt: end
+      }
+    });
+    return expensesYear;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { createExpenses, getExpensesWithUserId, getExpensesFliterWithYear };
