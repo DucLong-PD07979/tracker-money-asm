@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { forwardRef, ComponentPropsWithRef } from "react";
 import classnames from "classnames";
 
-interface InputTextProps {
+interface InputTextProps extends ComponentPropsWithRef<"input"> {
     inputsize?: "xs" | "md" | "lg";
     rounder?: "xs" | "md" | "lg";
     placeholder?: string;
@@ -10,7 +10,6 @@ interface InputTextProps {
         React.InputHTMLAttributes<HTMLInputElement>,
         HTMLInputElement
     >;
-    type?: string;
 }
 
 const InputText = forwardRef<HTMLInputElement, InputTextProps>(
@@ -20,8 +19,8 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
             placeholder,
             refinput,
             rounder,
-            type,
             classNames: additionalClassNames,
+            ...rest
         },
         ref
     ) => {
@@ -37,9 +36,9 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
         return (
             <input
                 ref={ref}
-                type={type}
                 className={inputStyle}
                 placeholder={placeholder}
+                {...rest}
                 {...refinput}
             />
         );

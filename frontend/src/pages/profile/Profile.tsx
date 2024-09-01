@@ -1,7 +1,6 @@
 import { SectionWrapper } from "@/components/section";
 import NewTransactionProvider from "./components/NewTransactionContext";
 import NewTransactions from "./components/NewTransactions";
-import Recent from "./components/Recent";
 
 const Profile = () => {
     return (
@@ -11,9 +10,6 @@ const Profile = () => {
                     <NewTransactionProvider>
                         <NewTransactions />
                     </NewTransactionProvider>
-                </SectionWrapper>
-                <SectionWrapper title="recent">
-                    <Recent />
                 </SectionWrapper>
             </div>
         </div>

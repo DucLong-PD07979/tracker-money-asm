@@ -1,7 +1,6 @@
-import { forwardRef } from "react";
+import { forwardRef, ComponentPropsWithRef } from "react";
 import classnames from "classnames";
-
-interface InputRadioProps {
+interface InputRadioProps extends ComponentPropsWithRef<"input"> {
     inputsize?: "xs" | "md" | "lg";
     rounder?: "xs" | "md" | "lg";
     placeholder?: string;
