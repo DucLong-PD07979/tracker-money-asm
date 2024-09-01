@@ -4,6 +4,8 @@ enum PageRouters {
     REGISTER = "/register",
     LOGIN = "login",
     BUDGETS = "/budgets",
+    BUDGETS_DETAILS = "/:type/:slug",
+
     TRANSACTIONS = "/transactions",
     REPORTS = "/reports",
     GOALS = "/goals",

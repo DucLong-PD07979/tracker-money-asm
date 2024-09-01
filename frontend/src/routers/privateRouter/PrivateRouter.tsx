@@ -6,12 +6,13 @@ import Cookies from "js-cookie";
 import { getUserWithToken } from "@/api/userApi";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import DotSpinner from "@/components/ui/loading/DotSpinner";
 
 interface PrivateRouterProps {
     children: ReactNode;
 }
 
-const PrivateRouter: FC<PrivateRouterProps> = ({ children }) => {
+const usePrivateRoute = () => {
     const dispatch = useAppDispatch();
     const accessToken = Cookies.get("jwt");
 
@@ -24,24 +25,30 @@ const PrivateRouter: FC<PrivateRouterProps> = ({ children }) => {
 
     useEffect(() => {
         if (isError) {
-            toast.error(`login error ${error.message}`);
+            toast.error(`Error fetching user info: ${error.message}`);
         }
         if (isSuccess) {
             dispatch(getUserInfor(data));
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, data, isSuccess, isError]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, isSuccess, dispatch, error]);
+
+    return { isLoading, isError, accessToken, error };
+};
+
+const PrivateRouter: FC<PrivateRouterProps> = ({ children }) => {
+    const { isLoading, isError, accessToken, error } = usePrivateRoute();
 
     if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (isError) {
-        return <div>Error: {error.message}</div>;
+        return <DotSpinner />;
     }
 
     if (!accessToken) {
         return <Navigate to={"/register"} />;
+    }
+
+    if (isError) {
+        return <div>Error: {error?.message}</div>;
     }
     return <>{children}</>;
 };

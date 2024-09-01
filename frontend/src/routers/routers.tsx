@@ -12,6 +12,7 @@ const Budgets = lazy(() => import("../pages/budgets/Budgets"));
 const Transactions = lazy(() => import("../pages/transactions/Transactions"));
 const Reports = lazy(() => import("../pages/reports/Reports"));
 const Goals = lazy(() => import("../pages/goals/Goals"));
+const BudgetsDetails = lazy(() => import("../pages/budgets/BudgetsDetails"));
 
 const ROUTER_LAYOUT_NONE = "none";
 const ROUTER_LAYOUT_DEFAULT = "default";
@@ -61,6 +62,16 @@ const routerDataWithLayout = [
         role: ROUTER_ROLE_PRIVATE,
     },
     {
+        path: PageRouters.BUDGETS_DETAILS,
+        element: (
+            <Suspense fallback="loading...">
+                <BudgetsDetails />
+            </Suspense>
+        ),
+        layout: ROUTER_LAYOUT_DEFAULT,
+        role: ROUTER_ROLE_PRIVATE,
+    },
+    {
         path: PageRouters.TRANSACTIONS,
         element: (
             <Suspense fallback="loading...">
@@ -98,10 +109,18 @@ const handleRouterData = () => {
     routerDataWithLayout.forEach((item) => {
         switch (item.layout) {
             case "none":
-                pathData.push({
-                    path: item.path,
-                    element: item.element,
-                });
+                if (item.children) {
+                    pathData.push({
+                        path: item.path,
+                        element: item.element,
+                        children: item.children,
+                    });
+                } else {
+                    pathData.push({
+                        path: item.path,
+                        element: item.element,
+                    });
+                }
                 if (item.role === ROUTER_ROLE_PRIVATE) {
                     item.element = <PrivateRouter children={item.element} />;
                 }
@@ -111,10 +130,18 @@ const handleRouterData = () => {
                 if (item.role === ROUTER_ROLE_PRIVATE) {
                     item.element = <PrivateRouter children={item.element} />;
                 }
-                pathData.push({
-                    path: item.path,
-                    element: item.element,
-                });
+                if (item.children) {
+                    pathData.push({
+                        path: item.path,
+                        element: item.element,
+                        children: item.children,
+                    });
+                } else {
+                    pathData.push({
+                        path: item.path,
+                        element: item.element,
+                    });
+                }
                 break;
         }
     });
