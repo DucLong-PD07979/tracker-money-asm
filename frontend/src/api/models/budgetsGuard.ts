@@ -1,7 +1,9 @@
-interface FormBudgetsType {
-    amountMonth: number;
+interface FormBugetYear {
     amountYear: number;
-    currency: string;
 }
 
-export type { FormBudgetsType };
+interface FormBugetMonth {
+    amountMonth: number;
+}
+
+export type { FormBugetYear, FormBugetMonth };
