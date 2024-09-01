@@ -1,13 +1,28 @@
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { uiSelector } from "@/store/uiSlice/uiSlice";
 import { Avatar, Button } from "@/components/ui";
 import { Popover } from "@/components/popover";
 import { ArrowLeftCircleIcon, SettingIcon } from "@/components/ui/icon";
-import { authSelector } from "@/store/authSlice/authSlice";
+import { authSelector, logoutSuccess } from "@/store/authSlice/authSlice";
+import { logout } from "@/api/authApi";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const HeaderMenuPopover = () => {
     const { user } = useAppSelector(authSelector);
     const { username, avatar, email } = user;
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    const handleLogout = async () => {
+        const logoutSatuts = await logout();
+        if (logoutSatuts === 200) {
+            Cookies.remove("jwt");
+            Cookies.remove("jwt-refresh");
+            dispatch(logoutSuccess());
+            navigate("/register");
+        }
+    };
     return (
         <div className="header-popover-wrapper">
             <div className="header-popover-top">
@@ -35,6 +50,7 @@ const HeaderMenuPopover = () => {
                         icon={
                             <ArrowLeftCircleIcon width="16px" height="16px" />
                         }
+                        onClick={() => handleLogout()}
                     >
                         Logout
                     </Button>
