@@ -3,14 +3,9 @@ import {
     sectionActiveType,
     useNewTransactionContext,
 } from "./NewTransactionContext";
-import {
-    ArrowRightStartOnRectangle,
-    ArrowTrendUp,
-    CreditCardIcon,
-    ScaleIcon,
-} from "@/components/ui/icon";
+import { ArrowTrendUp, CreditCardIcon, ScaleIcon } from "@/components/ui/icon";
 import { ReactNode } from "react";
-import { FormBudgets, FormWrapper, FormExpense } from "./form";
+import { FormBudgets, FormWrapper, FormExpense, FormIncome } from "./form";
 
 type HeaderBtnDataType = {
     value: sectionActiveType;
@@ -28,11 +23,6 @@ const headerBtnData: HeaderBtnDataType[] = [
         value: "expense",
         text: "expense",
         icon: <ScaleIcon height="16" width="16" />,
-    },
-    {
-        value: "transfer",
-        text: "transfer",
-        icon: <ArrowRightStartOnRectangle height="16" width="16" />,
     },
     {
         value: "inCome",
@@ -76,15 +66,10 @@ const NewTransactions = () => {
                         <FormExpense />
                     </FormWrapper>
                 )}
-                {sectionActive === "transfer" && (
-                    <div style={{ margin: "100px 0" }}>
-                        Tính năng sẽ sớm có!
-                    </div>
-                )}
                 {sectionActive === "inCome" && (
-                    <div style={{ margin: "100px 0" }}>
-                        Tính năng sẽ sớm có!{" "}
-                    </div>
+                    <FormWrapper>
+                        <FormIncome />
+                    </FormWrapper>
                 )}
             </div>
         </div>
