@@ -13,6 +13,7 @@
 @import "./components/table";
 @import "./components/avatar";
 @import "./components/popover";
+@import "./components/loading/dotSpinner";
 
 @import "./layouts/defaultLayout";
 
@@ -22,3 +23,4 @@
 @import "./pages/register";
 @import "./pages/profile";
 @import "./pages/budgets";
+@import "./pages/transactions";
