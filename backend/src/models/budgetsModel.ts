@@ -15,8 +15,7 @@ const YearlyBudgetSchema = new Schema<YearlyBudget>(
     user_id: { type: Schema.ObjectId, required: true },
     month: {
       type: Map,
-      of: MonthBudgetSchema,
-      required: true
+      of: MonthBudgetSchema
     }
   },
   { timestamps: true }
