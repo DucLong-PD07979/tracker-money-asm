@@ -17,13 +17,14 @@ const createIncome = async (req: Request, res: Response) => {
 
 const getIncomeWithFilterOptions = async (req: Request, res: Response) => {
   try {
-    const { filterType, duration } = req.query;
-    if (!filterType && !duration) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Lỗi từ phía khách hàng' });
-    }
-
     const userDecodeFromToken = req.user;
     const userInfor = await getUserInforWithToken(userDecodeFromToken);
+
+    const { filterType, duration } = req.query;
+    if (!filterType && !duration) {
+      const income = await incomeServices.getIncomeWithUserId(userInfor?._id);
+      return res.status(StatusCodes.CREATED).json({ income });
+    }
 
     if (filterType === 'year') {
       const income = await incomeServices.getIncomeFilterWithYear(userInfor?._id, duration);
@@ -49,4 +50,33 @@ const getIncomeWithFilterOptions = async (req: Request, res: Response) => {
   }
 };
 
-export { createIncome, getIncomeWithFilterOptions };
+const deleteIncome = async (req: Request, res: Response) => {
+  try {
+    const userDecodeFromToken = req.user;
+    const userInfor = await getUserInforWithToken(userDecodeFromToken);
+    const result = await incomeServices.deleteIncomeWithUserid(`${userInfor?._id}`, req.body.ids);
+    if (result) {
+      return res.status(StatusCodes.OK).json({
+        message: `xóa thành công ${result.deletedCount} thu nhập`,
+        result
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateIncome = async (req: Request, res: Response) => {
+  try {
+    const userDecodeFromToken = req.user;
+    const userInfor = await getUserInforWithToken(userDecodeFromToken);
+    const income_id = req.params.id;
+    const inComeBody = { ...req.body, user_id: userInfor?._id };
+    const updateIncome = await incomeServices.updateIncomeWithUserId(income_id, inComeBody);
+    res.status(StatusCodes.CREATED).json({ message: 'Bạn đã cập nhật thành công', updateIncome });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { createIncome, getIncomeWithFilterOptions, deleteIncome, updateIncome };

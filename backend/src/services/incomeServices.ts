@@ -11,6 +11,19 @@ const createIncome = async (incomeBody: any) => {
   }
 };
 
+const getIncomeWithUserId = async (id: any) => {
+  try {
+    const incomeData = await IncomeModel.find({
+      user_id: id
+    })
+      .limit(9)
+      .sort({ date: -1 });
+    return incomeData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getIncomeFilterWithYear = async (id: any, year: any) => {
   try {
     const start = startOfYear(year);
@@ -62,17 +75,25 @@ const getIncomeFilterWithDate = async (id: any, duration: any) => {
   }
 };
 
-const updateIncomeWithUserId = async (id: any) => {
+const updateIncomeWithUserId = async (id: string, incomeData: any) => {
   try {
-    return '';
+    const updateIncome = await IncomeModel.findOneAndUpdate({ _id: id }, incomeData);
+    if (updateIncome) {
+      await updateIncome.save();
+      return updateIncome;
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
-const deleteIncomeWithUserid = async (id: any) => {
+const deleteIncomeWithUserid = async (user_id: string, ids: string[]) => {
   try {
-    return '';
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return false;
+    }
+    const result = await IncomeModel.deleteMany({ _id: { $in: ids }, user_id });
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -84,5 +105,6 @@ export {
   getIncomeFilterWithMonth,
   updateIncomeWithUserId,
   deleteIncomeWithUserid,
-  getIncomeFilterWithDate
+  getIncomeFilterWithDate,
+  getIncomeWithUserId
 };
