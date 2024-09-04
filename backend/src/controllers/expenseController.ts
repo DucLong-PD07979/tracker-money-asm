@@ -13,8 +13,8 @@ const createExpense = async (req: Request, res: Response) => {
       message: 'Tạo chi phí thành công',
       newExpense
     });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
@@ -27,25 +27,39 @@ const getExpensesWithUserId = async (req: Request, res: Response) => {
       success: true,
       expenses
     });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
 const updateExpensesWithUserId = async (req: Request, res: Response) => {
   try {
-    console.log('hello');
-  } catch (error) {
-    console.log(error);
+    const userDecodeFromToken = req.user;
+    const userInfor = await getUserInforWithToken(userDecodeFromToken);
+    const expensesId = req.params.id;
+    const expensesNew = { ...req.body, user_id: userInfor?._id };
+    const updateIncome = await services.updateExpenses(expensesId, expensesNew);
+    res.status(StatusCodes.CREATED).json({ message: 'Bạn đã cập nhật thành công', updateIncome });
+  } catch (error: any) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
 const deleteWithUserId = async (req: Request, res: Response) => {
   try {
+    const idExpenses = req.body.ids;
+    console.log(idExpenses);
     const userDecodeFromToken = req.user;
     const userInfor = await getUserInforWithToken(userDecodeFromToken);
-  } catch (error) {
-    console.log(error);
+    const result = await services.deleteExpenses(`${userInfor?._id}`, idExpenses);
+    if (result) {
+      return res.status(StatusCodes.OK).json({
+        message: `xóa thành công ${result.deletedCount} chi phí`,
+        result
+      });
+    }
+  } catch (error: any) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
