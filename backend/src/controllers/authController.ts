@@ -11,11 +11,12 @@ import {
   hashPassword,
   blackListTokens
 } from '@/services/authServices';
-import { CLIENT_URL, REFRESH_TOKEN_KEY } from '@/configs/environment';
+import { CLIENT_URL, IS_PRODUCTION, REFRESH_TOKEN_KEY } from '@/configs/environment';
 import passport from 'passport';
 import UserModel from '@/models/userModel';
+import { json } from 'body-parser';
 
-const REFRESH_COOKIE_NAME = 'refresh-token';
+const REFRESH_COOKIE_NAME = 'jwt-refresh';
 
 const authRegister = async (req: Request, res: Response) => {
   //   try {
@@ -124,14 +125,9 @@ const authLoginFail = async (req: Request, res: Response) => {
 };
 
 const authLogout = async (req: Request, res: Response) => {
-  //   const refreshToken = req.cookies?.[REFRESH_COOKIE_NAME];
-  //   const decoded = await getVerifyToken(refreshToken, REFRESH_TOKEN_KEY!);
-  //   if (decoded) {
-  //     blackListTokens.push(refreshToken);
-  //   }
-  //   res.clearCookie(REFRESH_COOKIE_NAME);
-  //   res.send('user logout successfully');
-  //   return res.redirect(CLIENT_URL);
+  res.clearCookie('jwt-refresh', { httpOnly: true, secure: true });
+  res.clearCookie('jwt', { httpOnly: true, secure: true });
+  return res.status(StatusCodes.OK).json({ message: 'Đăng xuất thành công' });
 };
 
 const authRefreshToken = async (req: Request, res: Response) => {
@@ -143,10 +139,7 @@ const authRefreshToken = async (req: Request, res: Response) => {
     const decoded = await getVerifyToken(refreshToken, REFRESH_TOKEN_KEY!);
     if (decoded) {
       const accessToken = generateAccessToken(decoded.userData);
-      return res.status(StatusCodes.OK).json({
-        accessToken,
-        usercurrent: decoded.userData
-      });
+      return res.cookie('jwt', accessToken, { httpOnly: false, secure: IS_PRODUCTION });
     } else {
       return res.status(StatusCodes.UNAUTHORIZED).json('Invalid token');
     }
@@ -162,9 +155,19 @@ const authWithGoogle = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const authWithGoogleCallback = (req: Request, res: Response, next: NextFunction) => {
-  return passport.authenticate('google', {
-    successRedirect: CLIENT_URL,
-    failureRedirect: '/auth/failed'
+  passport.authenticate('google', { session: false }, (err: any, user: any, info: any) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Có lỗi ở phía server khi cố gắng xác thực' });
+    }
+
+    const { accessToken, refreshToken }: any = user;
+    res.cookie('jwt', accessToken, { httpOnly: false, secure: IS_PRODUCTION });
+    res.cookie('jwt-refresh', refreshToken, { httpOnly: false, secure: IS_PRODUCTION });
+    res.redirect(`${CLIENT_URL}/profile`);
   })(req, res, next);
 };
 

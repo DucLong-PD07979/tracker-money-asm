@@ -2,7 +2,7 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
 
 import { CLIENT_ID_GOOGLE, CLIENT_SECRET_GOOGLE } from './environment';
-import { checkEmailIsAlreadyExists, generateAccessToken } from '@/services/authServices';
+import { checkEmailIsAlreadyExists, generateAccessToken, generateRrefreshToken } from '@/services/authServices';
 import UserModel from '@/models/userModel';
 import IUser from '@/models/guard/userGuard';
 
@@ -21,7 +21,7 @@ passport.use(
     async function (_request: any, _accessToken: any, _refreshToken: any, profile: any, done: any) {
       try {
         const userData: IUser[] = await UserModel.find().lean();
-        console.log(profile);
+        // console.log(profile);
 
         const checkIsEmail = checkEmailIsAlreadyExists(profile.email, userData);
 
@@ -40,8 +40,9 @@ passport.use(
         if (profile.verified) {
           const userAccount = userData.find((userInfor: IUser) => userInfor.email === profile.email);
           if (userAccount) {
-            const createAccessToken = generateAccessToken(userAccount);
-            done(null, createAccessToken);
+            const accessToken = generateAccessToken(userAccount);
+            const refreshToken = generateRrefreshToken(userAccount);
+            done(null, { accessToken, refreshToken });
           } else {
             done(null, false, { message: 'User not found' });
           }
