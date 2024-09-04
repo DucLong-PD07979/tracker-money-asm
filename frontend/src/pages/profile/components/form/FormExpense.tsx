@@ -20,19 +20,15 @@ import { formatCurrency } from "@/utils/helper/formatHelpler";
 import DotSpinner from "@/components/ui/loading/DotSpinner";
 
 const expensesSchema = object({
-    id_expense_cate: string().required(),
+    id_expense_cate: string().required("Trường này không được bỏ trống"),
     amount: number()
         .required("Trường này không được bỏ trống")
         .transform((value, originalValue) =>
             originalValue.trim() === "" ? undefined : value
         ),
     duration: date().default(() => new Date()),
-    is_paid: string().default("flase"),
-    description: string()
-        .required("Trường này không được bỏ trống")
-        .transform((value, originalValue) =>
-            originalValue.trim() === "" ? undefined : value
-        ),
+    is_paid: string().required().default("false"),
+    description: string().required("Trường này không được bỏ trống"),
 });
 const FormExpense = () => {
     const {
@@ -72,8 +68,7 @@ const FormExpense = () => {
         return <DotSpinner />;
     }
 
-    const cateExpenseDefaultSelect =
-        cateExpenseData.data.categoriesExpenes[0]._id;
+    const cateExpenseDefaultSelect = cateExpenseData._id;
 
     return (
         <>
@@ -84,7 +79,7 @@ const FormExpense = () => {
                             <label htmlFor="">Budgets type option</label>
                             <SelectBox
                                 control={control}
-                                options={cateExpenseData.data.categoriesExpenes}
+                                options={cateExpenseData}
                                 selectValue={cateExpenseDefaultSelect}
                                 name={"id_expense_cate"}
                             />
@@ -134,7 +129,7 @@ const FormExpense = () => {
                                     <InputRadio
                                         refinput={register("is_paid")}
                                         placeholder="description expense month"
-                                        value="true"
+                                        defaultValue="true"
                                         classNames="input-radio"
                                         id="is_paid_true"
                                     />
@@ -149,10 +144,10 @@ const FormExpense = () => {
                                     <InputRadio
                                         refinput={register("is_paid")}
                                         placeholder="description expense month"
-                                        value="false"
+                                        defaultValue="false"
                                         classNames="input-radio"
                                         id="is_paid_false"
-                                        checked
+                                        defaultChecked
                                     />
                                     <label
                                         htmlFor="is_paid_false"
