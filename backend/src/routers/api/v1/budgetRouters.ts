@@ -5,11 +5,13 @@ import { verifyToKen } from '@/middlewares/authMiddleware';
 const Router = express.Router();
 
 Router.post('/budgets/year', [verifyToKen], controllers.createYearBudget);
-Router.get('/budgets/year/:year', [verifyToKen], controllers.getBudgetYearWithUserId);
 Router.post('/budgets/month', [verifyToKen], controllers.createMonthBudget);
-Router.get('/budgets/month', controllers.getBudgetMonthWithBudgetId);
 Router.put('/budgets/year/:id', [verifyToKen], controllers.updateYearBudget);
-Router.put('/budgets/month/:id', [verifyToKen], controllers.updateMonthBudget);
+Router.put('/budgets/month/:budget_id', [verifyToKen], controllers.updateMonthBudget);
+Router.get('/budgets/year/:year', [verifyToKen], controllers.getBudgetYearWithUserId);
+Router.get('/budgets/month/:budget_id', [verifyToKen], controllers.getBudgetMonthWithBudgetId);
+Router.get('/budgets', [verifyToKen], controllers.getAllYearBudgets);
 Router.delete('/budgets/:id', [verifyToKen], controllers.deleteBudgetWithUserId);
+Router.get('/budgets/details/:year', [verifyToKen], controllers.getBudgetYearDetails);
 
 export default Router;
