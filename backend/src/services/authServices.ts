@@ -65,7 +65,7 @@ const checkIsPasswordComfir = async (pass: string, email: string, userData: IUse
 };
 
 const generateAccessToken = (data: any) => {
-  const tokenLifeTime = Math.floor(Date.now() / 1000) + 60 * 100;
+  const tokenLifeTime = Math.floor(Date.now() / 1000) + 60 * 1000;
   const token = jwt.sign(
     {
       exp: tokenLifeTime,

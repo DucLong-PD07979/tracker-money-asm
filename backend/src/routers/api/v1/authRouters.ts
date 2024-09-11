@@ -1,5 +1,4 @@
 import express from 'express';
-import { StatusCodes } from 'http-status-codes';
 import {
   authRegister,
   authLogin,
@@ -7,11 +6,10 @@ import {
   authRefreshToken,
   authWithGoogle,
   authLoginSuccess,
-  authLoginFail
+  authLoginFail,
+  authWithGoogleCallback
 } from '@/controllers/authController';
 import { verifyToKen } from '@/middlewares/authMiddleware';
-import passport from 'passport';
-import { IS_PRODUCTION } from '@/configs/environment';
 const Routes = express.Router();
 
 Routes.post('/register', authRegister);
@@ -21,17 +19,6 @@ Routes.get('/login/fail', authLoginFail);
 Routes.post('/logout', verifyToKen, authLogout);
 Routes.post('/refresh-token', authRefreshToken);
 Routes.get('/google', authWithGoogle);
-Routes.get(
-  '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: '/failed',
-    session: false
-  }),
-  (req, res) => {
-    const token = req.user;
-    res.cookie('jwt', token, { httpOnly: false, secure: IS_PRODUCTION ? true : false });
-    res.redirect('http://localhost:5173/profile');
-  }
-);
+Routes.get('/google/callback', authWithGoogleCallback);
 
 export default Routes;
