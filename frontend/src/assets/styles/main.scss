@@ -15,6 +15,7 @@
 @import "./components/popover";
 @import "./components/loading/dotSpinner";
 @import "./components/dialog";
+@import "./components/pagination";
 
 @import "./layouts/defaultLayout";
 
@@ -25,3 +26,4 @@
 @import "./pages/profile";
 @import "./pages/budgets";
 @import "./pages/transactions";
+@import "./pages/budgetsDetails";

@@ -1,0 +1,57 @@
+.budget-details {
+    padding: 1.5rem;
+    background-color: $color-fourth-80;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &__wrapper {
+        margin-bottom: 20px;
+        background-color: $color-fourth-100;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: $boxShadowColor-100;
+    }
+
+    &__title {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        color: $color-secondary-100;
+    }
+
+    &__info {
+        margin-bottom: 10px;
+
+        &__item {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        &-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        color: $color-secondary-100;
+    }
+
+    &__amount {
+        font-size: 1.2rem;
+        color: $color-third-100;
+        font-weight: 600;
+    }
+}

@@ -1,9 +1,51 @@
+$max-cols: 12;
+$rows: 12;
+
 .grid {
     display: grid;
+    gap: var(--grid-gap, 18px);
+    width: var(--grid-width, 100%);
 }
 
-.grid-rows-2 { grid-template-rows: repeat(2, auto); }
-.grid-rows-3 { grid-template-rows: repeat(3, auto); }
+@for $i from 1 through $max-cols {
+    .grid-cols-#{$i} {
+        grid-template-columns: repeat(#{$i}, 1fr);
+    }
+}
 
-.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+// /* Responsive grid columns */
+@media (min-width: 768px) {
+    @for $i from 1 through $max-cols {
+        .md\:grid-cols-#{$i} {
+            grid-template-columns: repeat(#{$i}, 1fr);
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    @for $i from 1 through $max-cols {
+        .lg\:grid-cols-#{$i} {
+            grid-template-columns: repeat(#{$i}, 1fr);
+        }
+    }
+}
+
+@for $i from 1 through $max-cols {
+    @for $j from $i through $max-cols {
+        .col-#{$i}-#{$j} {
+            grid-column: #{$i} / #{$j + 1};
+        }
+    }
+}
+
+.grid-gap-sm {
+    --grid-gap: 8px;
+}
+
+.grid-gap-md {
+    --grid-gap: 18px;
+}
+
+.grid-gap-lg {
+    --grid-gap: 24px;
+}

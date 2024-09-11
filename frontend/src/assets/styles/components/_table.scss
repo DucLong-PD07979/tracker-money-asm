@@ -1,6 +1,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 26px;
 }
 
 th,
@@ -31,4 +32,31 @@ tbody tr:hover {
 
 .table-action-btn:hover.table-action-btn__remove {
     color: $color-failed;
+}
+
+.table-navbar {
+    margin: 12px 0;
+}
+
+.table-navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .table-navbar__search-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.6rem;
+        color: $color-secondary-100;
+
+        .search-btn {
+            font-weight: 600;
+        }
+    }
+}
+
+.pdf-view {
+    width: 100%;
+    height: 100vh;
 }

@@ -1,0 +1,33 @@
+.pagination-container {
+    display: flex;
+    justify-content: left;
+    margin: 30px auto;
+    width: 100%;
+    color: $color-secondary-100;
+
+    .pagination-button {
+        cursor: pointer;
+        background-color: transparent;
+    }
+
+    .pagination-button:disabled {
+        opacity: 0.5;
+        padding: 4px 8px;
+        cursor: not-allowed;
+    }
+
+    .pagination-info {
+        display: flex;
+        align-items: center;
+        padding: 0 26px;
+    }
+
+    .pagination-go {
+        display: flex;
+        align-items: center;
+    }
+
+    .pagination-input {
+        width: 4rem;
+    }
+}

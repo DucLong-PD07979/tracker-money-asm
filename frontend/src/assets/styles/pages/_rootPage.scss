@@ -3,19 +3,31 @@
 @import "../components/grid";
 
 .hero-banner {
-    padding: 0 22%;
     padding-top: 100px;
+
+    @include reponsive(768px) {
+        & {
+            padding-top: 60px;
+        }
+    }
     .hero-banner__title {
         font-size: 6.4rem;
         font-weight: 500;
         text-align: center;
         margin: 0;
         color: $color-first-100;
+
+        @include reponsive(1024px) {
+            & {
+                font-size: 4.4rem;
+            }
+        }
     }
 
     .hero-banner__title-wrapper {
         display: flex;
         align-items: center;
+        justify-content: center;
         font-size: 6.4rem;
         font-weight: 300;
         margin: 0 0 50px 0;
@@ -23,12 +35,29 @@
         color: $color-secondary-90;
 
         .hero-banner__title {
-            font-size: 6.4rem;
             font-weight: 500;
             text-align: center;
             margin: 0;
             margin-left: 8px;
             color: $color-first-100;
+
+            @include reponsive(480px) {
+                & {
+                    font-size: 2.4rem;
+                }
+            }
+        }
+
+        @include reponsive(1024px) {
+            & {
+                font-size: 3.4rem;
+            }
+        }
+
+        @include reponsive(480px) {
+            & {
+                font-size: 2.4rem;
+            }
         }
     }
 
@@ -52,7 +81,12 @@
 .card-introduce__wrapper {
     margin-top: 80px;
     margin-bottom: 150px;
-
+    @include reponsive(480px) {
+        & {
+            margin-top: 50px;
+            margin-bottom: 70px;
+        }
+    }
     .card-introduce__box {
         display: flex;
         justify-content: center;
@@ -78,16 +112,28 @@
 .introduce-section {
     padding: 50px;
 
-    .introduce-section__gird {
-        padding: 0 8%;
+    @include reponsive(480px) {
+        & {
+            padding: 10px;
+        }
+    }
+
+    .introduce-section_grid {
+        max-width: 1000px;
         align-items: center;
+        margin: auto;
     }
 
     & img {
-        width: 100%;
         box-shadow: $boxShadowColor-100;
         border-radius: 12px;
         max-height: 360px;
+
+        @include reponsive(560px) {
+            & {
+                order: 2;
+            }
+        }
     }
 
     &__short {

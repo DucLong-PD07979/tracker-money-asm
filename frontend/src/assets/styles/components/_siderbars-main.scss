@@ -6,7 +6,11 @@
     z-index: 9999;
     width: $siderbarsMain-width-open;
     background-color: $color-fourth-90;
-
+    @include reponsive(520px) {
+        & {
+            display: none;
+        }
+    }
     .siderbar-inner {
         position: fixed;
         left: 0;
@@ -62,6 +66,7 @@
 
         .siderbar-nav {
             margin-top: calc($header-main-height + 30px);
+
             .siderbar-nav__list-item-link {
                 display: flex;
                 align-items: center;
