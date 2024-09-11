@@ -4,6 +4,7 @@ interface FormBugetYear {
 
 interface FormBugetMonth {
     amountMonth: number;
+    month: string;
 }
 
 export type { FormBugetYear, FormBugetMonth };

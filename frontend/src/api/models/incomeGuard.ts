@@ -5,4 +5,9 @@ interface IncomeType {
     description: string;
 }
 
-export type { IncomeType };
+interface IncomeUpdateType extends IncomeType {
+    id: string;
+    newData: Partial<IncomeType>;
+}
+
+export type { IncomeType, IncomeUpdateType };
