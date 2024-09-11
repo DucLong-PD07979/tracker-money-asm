@@ -2,7 +2,7 @@
   "name": "backend-tracker-money-asm",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "npx nodemon",
     "build": "rimraf ./dist && tsc && tsc-alias",
@@ -52,5 +52,8 @@
     "mongoose": "^8.5.0",
     "passport": "^0.7.0",
     "passport-google-oauth2": "^0.2.0"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
