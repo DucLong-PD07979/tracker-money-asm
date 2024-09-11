@@ -58,9 +58,9 @@ const FormIncome = () => {
 
     return (
         <>
-            <Grid columnNumber={1} gap="18px">
+            <Grid>
                 <form onSubmit={handleSubmit(handleCreateExpenses)}>
-                    <Grid gap="18px" columnNumber={3}>
+                    <Grid classNames="lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                         <div className="form-flex-cl">
                             <label htmlFor="">Amount budgets</label>
                             <InputText

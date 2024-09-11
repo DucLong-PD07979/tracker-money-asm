@@ -24,16 +24,16 @@ const RootPage = () => {
             title: "100% Secured data",
         },
         {
-            image: "https://moneylover.me/img/introfeature/1.svg",
-            title: "100% Secured data",
+            image: "https://moneylover.me/img/introfeature/2.svg",
+            title: "1 Million+ users",
         },
         {
-            image: "https://moneylover.me/img/introfeature/1.svg",
-            title: "100% Secured data",
+            image: "https://moneylover.me/img/introfeature/3.svg",
+            title: "100K+ 5-star reviews",
         },
         {
-            image: "https://moneylover.me/img/introfeature/1.svg",
-            title: "100% Secured data",
+            image: "https://moneylover.me/img/introfeature/4.svg",
+            title: "App of the day",
         },
     ];
 
@@ -47,17 +47,17 @@ const RootPage = () => {
         },
         {
             order: 2,
-            image: "https://moneylover.me/img/details/Transaction@4x.png",
-            title: "Simple money tracker",
+            image: "https://moneylover.me/img/details/budget@4x.png",
+            title: "Painless budgeting",
             descriptionShort:
                 "It takes seconds to record daily transactions. Put them into clear and visualized categories such as Expense: Food, Shopping or Income: Salary, Gift.",
         },
         {
             order: 3,
-            image: "https://moneylover.me/img/details/Transaction@4x.png",
-            title: "Simple money tracker",
+            image: "https://moneylover.me/img/details/REPORT@4x.png",
+            title: "The whole picture in one place",
             descriptionShort:
-                "It takes seconds to record daily transactions. Put them into clear and visualized categories such as Expense: Food, Shopping or Income: Salary, Gift.",
+                "One report to give a clear view on your spending patterns. Understand where your money comes and goes with easy-to-read graphs.",
         },
     ];
 
@@ -95,9 +95,7 @@ const RootPage = () => {
                 <div className="card-introduce__wrapper">
                     <div className="container">
                         <Grid
-                            gap="26px"
-                            rowNumber={1}
-                            columnNumber={4}
+                            classNames="md:grid-cols-2 lg:grid-cols-4 grid-cols-1"
                             ariaLabel="Grid"
                         >
                             {heroCardData.map((card, index) => {
@@ -123,15 +121,14 @@ const RootPage = () => {
                 return (
                     <section className="introduce-section" key={index}>
                         <div className="container">
-                            <Grid
-                                classNames="introduce-section__gird"
-                                gap="40px"
-                                columnNumber={2}
-                                rowNumber={1}
-                            >
+                            <Grid classNames="grid-cols-1 md:grid-cols-2 introduce-section_grid">
                                 {order % 2 !== 0 && (
                                     <>
-                                        <img src={image} alt={title} />
+                                        <img
+                                            src={image}
+                                            alt={title}
+                                            className="img-card"
+                                        />
                                         <div className="introduce-section__short">
                                             <h3>{title}</h3>
                                             <p>{descriptionShort}</p>

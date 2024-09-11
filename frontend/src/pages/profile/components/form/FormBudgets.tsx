@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { object, number } from "yup";
+import { object, number, string } from "yup";
 
 import { Button, Grid } from "@/components/ui";
-import { InputText, ErrorMess } from "@/components/ui/form/input";
+import { InputText, ErrorMess, SelectBox } from "@/components/ui/form/input";
 import { PlusIcon } from "@/components/ui/icon";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -15,16 +15,13 @@ import {
 } from "@/api/budgetsApi";
 
 import { toast } from "react-toastify";
-import { format } from "date-fns";
 import { formatCurrency } from "@/utils/helper/formatHelpler";
 import { FormBugetMonth, FormBugetYear } from "@/api/models/budgetsGuard";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import {
-    budgetsSelector,
-    getBudgetYear,
-} from "@/store/budgetSlice/budgetSlice";
-import { useAppSelector } from "@/hooks";
+import { getBudgetYear } from "@/store/budgetSlice/budgetSlice";
+import monthArr from "@/utils/helper/monthData";
+import DotSpinner from "@/components/ui/loading/DotSpinner";
 
 const budgetYearSchema = object({
     amountYear: number()
@@ -40,6 +37,7 @@ const budgetMonthchema = object({
             originalValue.trim() === "" ? undefined : value
         )
         .required("Trường này không được bỏ trống!"),
+    month: string().required("Trường này không được bỏ trống!"),
 });
 
 const FormCreateBudgetYear = () => {
@@ -58,7 +56,7 @@ const FormCreateBudgetYear = () => {
     const mutation = useMutation({
         mutationFn: createBudgetYearWithUser,
         onSuccess: (data) => {
-            const message = data.data.message || "Tạo ngân sách năm thành công";
+            const message = data.message;
             toast.success(message);
             queryClient.invalidateQueries({ queryKey: ["budget"] });
             reset();
@@ -68,7 +66,12 @@ const FormCreateBudgetYear = () => {
         },
     });
 
-    const { isPending, data: bugetYear } = useQuery({
+    const {
+        isPending,
+        data: budgetYear,
+        isError,
+        error,
+    } = useQuery({
         queryKey: ["budget"],
         queryFn: () => getBudgetYearWithUserId(yearNow),
         staleTime: 5 * 1000,
@@ -79,11 +82,18 @@ const FormCreateBudgetYear = () => {
     };
 
     useEffect(() => {
-        if (bugetYear) {
-            // console.log(bugetYear);
-            dispatch(getBudgetYear(bugetYear.budgets[yearNow]));
+        if (budgetYear) {
+            dispatch(getBudgetYear(budgetYear));
         }
-    }, [bugetYear, dispatch, yearNow]);
+    }, [budgetYear, dispatch, yearNow]);
+
+    if (isPending) {
+        return <DotSpinner />;
+    }
+
+    if (isError) {
+        return <div>{error.message}</div>;
+    }
 
     return (
         <form
@@ -91,21 +101,13 @@ const FormCreateBudgetYear = () => {
             className="form-year"
         >
             <div className="form-flex-cl">
-                <label htmlFor="amountYear">
-                    {bugetYear
-                        ? `Your ${yearNow} Amount Budget`
-                        : `${yearNow} - Amount budgets`}
-                </label>
+                <label htmlFor="amountYear">Budget for {yearNow}</label>
                 <InputText
                     type="number"
                     refinput={register("amountYear")}
-                    placeholder={
-                        bugetYear
-                            ? formatCurrency(bugetYear.budgets[yearNow].amount)
-                            : formatCurrency(200000000)
-                    }
+                    placeholder={formatCurrency(200000000)}
                     id="amountYear"
-                    disabled={bugetYear}
+                    // disabled={budgetYear}
                 />
                 {errors.amountYear && (
                     <ErrorMess>{errors.amountYear.message}</ErrorMess>
@@ -119,7 +121,7 @@ const FormCreateBudgetYear = () => {
                         <PlusIcon width="14px" height="14px" />
                     )
                 }
-                disabled={isPending || bugetYear}
+                // disabled={isPending || budgetYear}
                 isLoading={mutation.isPending}
                 type="submit"
             >
@@ -130,7 +132,7 @@ const FormCreateBudgetYear = () => {
 };
 
 const FormCreateBudgetMonth = () => {
-    const monthNow = format(new Date(), "MMMM");
+    const monthNow = new Date().getMonth();
     const queryClient = useQueryClient();
 
     const {
@@ -138,6 +140,7 @@ const FormCreateBudgetMonth = () => {
         register,
         reset,
         formState: { errors },
+        control,
     } = useForm<FormBugetMonth>({
         resolver: yupResolver(budgetMonthchema),
     });
@@ -145,8 +148,7 @@ const FormCreateBudgetMonth = () => {
     const mutation = useMutation({
         mutationFn: createBudgetMonthWithUser,
         onSuccess: (data) => {
-            const message =
-                data.data.message || "Tạo ngân sách tháng thành công";
+            const message = data.message;
             toast.success(message);
             queryClient.invalidateQueries({ queryKey: ["budget"] });
             reset();
@@ -160,30 +162,36 @@ const FormCreateBudgetMonth = () => {
         mutation.mutate(data);
     };
 
-    const { budgetYear } = useAppSelector(budgetsSelector);
-    console.log(budgetYear);
     return (
         <form
             onSubmit={handleSubmit(handleCreateMonthBudget)}
             className="form-year"
         >
-            <div className="form-flex-cl">
-                <label htmlFor="amountMonth">{monthNow} - Amount budgets</label>
-                <InputText
-                    type="number"
-                    refinput={register("amountMonth")}
-                    placeholder={
-                        budgetYear.month && budgetYear.month[monthNow]
-                            ? formatCurrency(budgetYear.month[monthNow].amount)
-                            : formatCurrency(9000000)
-                    }
-                    id="amountMonth"
-                    disabled={budgetYear.month && budgetYear.month[monthNow]}
-                />
-                {errors.amountMonth && (
-                    <ErrorMess>{errors.amountMonth.message}</ErrorMess>
-                )}
-            </div>
+            <Grid classNames="grid-cols-3">
+                <div className="form-flex-cl col-1-2">
+                    <label htmlFor="amountMonth">
+                        Savings in {monthArr[monthNow].label}
+                    </label>
+                    <InputText
+                        type="number"
+                        refinput={register("amountMonth")}
+                        placeholder={formatCurrency(9000000)}
+                        id="amountMonth"
+                    />
+                    {errors.amountMonth && (
+                        <ErrorMess>{errors.amountMonth.message}</ErrorMess>
+                    )}
+                </div>
+                <div className="form-flex-cl">
+                    <label htmlFor="month">Option month</label>
+                    <SelectBox
+                        selectValue={monthArr[monthNow].value}
+                        control={control}
+                        name="month"
+                        options={monthArr}
+                    ></SelectBox>
+                </div>
+            </Grid>
             <Button
                 classNames="btn-submit"
                 size="md"
@@ -192,7 +200,6 @@ const FormCreateBudgetMonth = () => {
                         <PlusIcon width="14px" height="14px" />
                     )
                 }
-                disabled={budgetYear.month && budgetYear.month[monthNow]}
                 isLoading={mutation.isPending}
             >
                 Create budgets
@@ -204,7 +211,7 @@ const FormCreateBudgetMonth = () => {
 const FormBudgets = () => {
     return (
         <>
-            <Grid columnNumber={2} gap="18px">
+            <Grid classNames="lg:grid-cols-2 md:gird-cols-1">
                 <FormCreateBudgetYear />
                 <FormCreateBudgetMonth />
             </Grid>

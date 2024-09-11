@@ -4,13 +4,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 export interface BudgetSliceState {
-    budgetYear: any;
+    budgetDetails: any;
 }
 
 const initialState: BudgetSliceState = {
-    budgetYear: {
-        month: {},
-    },
+    budgetDetails: [],
 };
 
 export const budgetSlice = createSlice({
@@ -18,7 +16,7 @@ export const budgetSlice = createSlice({
     initialState,
     reducers: {
         getBudgetYear: (state, actions: PayloadAction<any>) => {
-            state.budgetYear = actions.payload;
+            state.budgetDetails = actions.payload;
         },
     },
 });

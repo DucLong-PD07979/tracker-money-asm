@@ -149,7 +149,7 @@ const TableExpenses = () => {
     ];
 
     return (
-        <div className="table-expenses-wrapper">
+        <div className="table-wrapper">
             <TanstackTable data={expensesData.expenses} columns={columns} />
         </div>
     );

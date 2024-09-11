@@ -67,6 +67,7 @@ const Header = () => {
     return (
         <header className={`header-main ${siderbarOpen ? "siderbarOpen" : ""}`}>
             <div className={`header-inner `}>
+                <div className="header-logo">Tracker money asm</div>
                 <div className="header-user-wrapper"></div>
                 <div className="header-right-wrapper">
                     <Popover content={<HeaderMenuPopover />}>

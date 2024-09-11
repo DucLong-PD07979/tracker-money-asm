@@ -18,6 +18,7 @@ import { createExpenses } from "@/api/expensesApi";
 import { toast } from "react-toastify";
 import { formatCurrency } from "@/utils/helper/formatHelpler";
 import DotSpinner from "@/components/ui/loading/DotSpinner";
+import { useEffect, useState } from "react";
 
 const expensesSchema = object({
     id_expense_cate: string().required("Trường này không được bỏ trống"),
@@ -30,7 +31,17 @@ const expensesSchema = object({
     is_paid: string().required().default("false"),
     description: string().required("Trường này không được bỏ trống"),
 });
+
+interface cateExpenseOptionsType {
+    value: string;
+    label: string;
+}
+
 const FormExpense = () => {
+    const [cateExpenseOptions, setCateExpenseOptions] = useState<
+        cateExpenseOptionsType[]
+    >([{ value: "", label: "" }]);
+
     const {
         control,
         handleSubmit,
@@ -41,16 +52,33 @@ const FormExpense = () => {
         resolver: yupResolver(expensesSchema),
     });
 
-    const { isPending, data: cateExpenseData } = useQuery({
+    const {
+        isPending,
+        isSuccess,
+        isError,
+        error,
+        data: cateExpenseData,
+    } = useQuery({
         queryKey: ["cate-expenses"],
         queryFn: getAllCategoriesExpense,
-        staleTime: 5 * 1000,
+        staleTime: 10 * 5000,
     });
+
+    useEffect(() => {
+        if (isSuccess) {
+            if (cateExpenseData.length > 0 && Array.isArray(cateExpenseData)) {
+                const convertOptions = cateExpenseData.map((item) => {
+                    return { value: item._id, label: item.label };
+                });
+                setCateExpenseOptions(convertOptions);
+            }
+        }
+    }, [isSuccess, cateExpenseData]);
 
     const mutation = useMutation({
         mutationFn: createExpenses,
         onSuccess: (data) => {
-            const messages = data.data.messages || "tạo thành công!";
+            const messages = data.message;
             toast.success(messages);
             reset();
         },
@@ -68,19 +96,20 @@ const FormExpense = () => {
         return <DotSpinner />;
     }
 
-    const cateExpenseDefaultSelect = cateExpenseData._id;
+    if (isError) {
+        return <div>{error.message}</div>;
+    }
 
     return (
         <>
             <Grid columnNumber={1} gap="18px">
                 <form onSubmit={handleSubmit(handleCreateExpenses)}>
-                    <Grid gap="18px" columnNumber={3}>
+                    <Grid classNames="gird-cols-1 lg:grid-cols-3">
                         <div className="form-flex-cl">
                             <label htmlFor="">Budgets type option</label>
                             <SelectBox
                                 control={control}
-                                options={cateExpenseData}
-                                selectValue={cateExpenseDefaultSelect}
+                                options={cateExpenseOptions}
                                 name={"id_expense_cate"}
                             />
 
@@ -124,7 +153,7 @@ const FormExpense = () => {
                         </div>
                         <div className="form-flex-cl">
                             <label htmlFor="">Paid</label>
-                            <Grid gap="18px" columnNumber={2}>
+                            <Grid classNames="grid-cols-2">
                                 <div>
                                     <InputRadio
                                         refinput={register("is_paid")}

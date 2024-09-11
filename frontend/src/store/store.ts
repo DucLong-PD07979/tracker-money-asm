@@ -3,6 +3,7 @@ import authReducer from "./authSlice/authSlice";
 import uiReducer from "./uiSlice/uiSlice";
 import budgetReducer from "./budgetSlice/budgetSlice";
 import expenseReducer from "./expenseSlice/expenseSlice";
+import incomeReducer from "./inomeSlice/incomeSlice";
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         ui: uiReducer,
         budget: budgetReducer,
         expense: expenseReducer,
+        income: incomeReducer,
     },
 });
 

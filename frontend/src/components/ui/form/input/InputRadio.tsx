@@ -5,7 +5,6 @@ interface InputRadioProps extends ComponentPropsWithRef<"input"> {
     rounder?: "xs" | "md" | "lg";
     placeholder?: string;
     classNames?: string;
-    value: string;
     refinput: React.DetailedHTMLProps<
         React.InputHTMLAttributes<HTMLInputElement>,
         HTMLInputElement

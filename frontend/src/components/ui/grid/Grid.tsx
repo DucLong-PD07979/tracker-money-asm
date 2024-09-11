@@ -8,32 +8,26 @@ interface GridProps {
     rowNumber?: number;
     columnNumber?: number;
     ariaLabel?: string;
+    width?: string;
 }
 const Grid: FC<GridProps> = ({
     children,
     classNames: additionalClassNames,
-    gap = "18px",
-    rowNumber,
-    columnNumber,
     ariaLabel,
 }) => {
     const gridClassNames = classNames(`grid`, additionalClassNames);
 
-    const gridStyles = {
-        gap: gap,
-        gridTemplateRows: rowNumber ? `repeat(${rowNumber}, auto)` : undefined,
-        gridTemplateColumns: columnNumber
-            ? `repeat(${columnNumber}, 1fr)`
-            : undefined,
-    };
+    // const gridStyles = {
+    //     gap: gap,
+    //     gridTemplateRows: rowNumber ? `repeat(${rowNumber}, auto)` : undefined,
+    //     gridTemplateColumns: columnNumber
+    //         ? `repeat(${columnNumber}, 1fr)`
+    //         : undefined,
+    //     width,
+    // };
 
     return (
-        <div
-            className={gridClassNames}
-            style={gridStyles}
-            role="grid"
-            aria-label={ariaLabel}
-        >
+        <div className={gridClassNames} role="grid" aria-label={ariaLabel}>
             {children}
         </div>
     );

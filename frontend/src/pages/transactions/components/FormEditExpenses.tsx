@@ -88,7 +88,7 @@ const FormEditExpenses: FC<FormEditExpensesPropsType> = ({
     return (
         <div className="edit-form-expenses">
             <form onSubmit={handleSubmit(handleUpdate)}>
-                <Grid gap="18px" columnNumber={3}>
+                <Grid classNames="lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                     <div className="hide">
                         <label htmlFor="">_id</label>
                         <InputText refinput={register("_id")} />
@@ -143,7 +143,7 @@ const FormEditExpenses: FC<FormEditExpensesPropsType> = ({
                     </div>
                     <div className="form-flex-cl">
                         <label htmlFor="">Paid</label>
-                        <Grid gap="18px" columnNumber={2}>
+                        <Grid classNames="grid-cols-2">
                             <div>
                                 <InputRadio
                                     refinput={register("is_paid")}
@@ -179,7 +179,7 @@ const FormEditExpenses: FC<FormEditExpensesPropsType> = ({
                         </Grid>
                     </div>
                 </Grid>
-                <Grid gap="10px" columnNumber={4}>
+                <Grid classNames="md:grid-cols-4">
                     <Button
                         classNames="btn-submit"
                         size="md"

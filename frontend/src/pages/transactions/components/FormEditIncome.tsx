@@ -59,7 +59,7 @@ const FormEditIncome: FC<ProductEditFormProps> = ({ income, onCancel }) => {
     return (
         <div className="form-edit-icom">
             <form onSubmit={handleSubmit(handleUpdate)}>
-                <Grid gap="18px" columnNumber={3}>
+                <Grid classNames="lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                     <div className="hide">
                         <label htmlFor="">_id</label>
                         <InputText refinput={register("_id")} />
@@ -106,7 +106,7 @@ const FormEditIncome: FC<ProductEditFormProps> = ({ income, onCancel }) => {
                         )}
                     </div>
                 </Grid>
-                <Grid gap="10px" columnNumber={4}>
+                <Grid classNames="md:grid-cols-4">
                     <Button
                         type="submit"
                         classNames="btn-submit"

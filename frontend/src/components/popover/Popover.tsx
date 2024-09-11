@@ -1,5 +1,5 @@
 import Tippy, { TippyProps } from "@tippyjs/react";
-import { ElementType, FC } from "react";
+import { ElementType, FC, useState } from "react";
 import "tippy.js/dist/tippy.css";
 
 interface PopoverProps extends TippyProps {
@@ -12,6 +12,16 @@ const Popover: FC<PopoverProps> = ({
     title = "",
     ...tippyProps
 }) => {
+    const [visible, setVisible] = useState(false);
+
+    const handleClickOutside = () => {
+        setVisible(false);
+    };
+
+    const handleToggle = () => {
+        setVisible(!visible);
+    };
+
     return (
         <>
             <Tippy
@@ -24,13 +34,13 @@ const Popover: FC<PopoverProps> = ({
                         title
                     )
                 }
-                hideOnClick="toggle"
-                trigger="click"
                 interactive={true}
+                visible={visible}
+                onClickOutside={handleClickOutside}
                 className="popover-wrapper"
                 {...tippyProps}
             >
-                {children}
+                <div onClick={handleToggle}>{children}</div>
             </Tippy>
         </>
     );

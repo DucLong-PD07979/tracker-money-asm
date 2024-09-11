@@ -6,14 +6,13 @@ import { FC } from "react";
 interface Option {
     value: string;
     label: string;
-    _id: number;
 }
 
 interface SelectBoxProps {
     name: string;
     options: Option[];
     control: Control<any>;
-    selectValue: string;
+    selectValue?: string;
     classNames?: string;
     errorMess?: string;
 }
@@ -37,7 +36,7 @@ const SelectBox: FC<SelectBoxProps> = ({
                             value={options.find(
                                 (option) => option.value === value
                             )}
-                            onChange={(val) => onChange(val?._id)}
+                            onChange={(val) => onChange(val?.value)}
                             options={options}
                         />
                     </>

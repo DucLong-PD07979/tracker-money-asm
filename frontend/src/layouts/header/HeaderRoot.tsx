@@ -1,7 +1,5 @@
-import React from "react";
 import PageRouters from "@/enum/routers/routers";
 import { Link } from "react-router-dom";
-
 interface MenuListType {
     path: string;
     label: string;
@@ -31,7 +29,7 @@ const HeaderRoot = () => {
                             Tracker money
                         </Link>
                     </h1>
-                    <div>
+                    <div className="header-menu">
                         <ul className="header-menu__list">
                             {menuList.map((item, index) => {
                                 return (
@@ -40,9 +38,6 @@ const HeaderRoot = () => {
                                     </li>
                                 );
                             })}
-                            <li>
-                                <button>việt nam me</button>
-                            </li>
                         </ul>
                     </div>
                 </div>

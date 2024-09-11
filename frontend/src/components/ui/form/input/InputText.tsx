@@ -6,7 +6,7 @@ interface InputTextProps extends ComponentPropsWithRef<"input"> {
     rounder?: "xs" | "md" | "lg";
     placeholder?: string;
     classNames?: string;
-    refinput: React.DetailedHTMLProps<
+    refinput?: React.DetailedHTMLProps<
         React.InputHTMLAttributes<HTMLInputElement>,
         HTMLInputElement
     >;

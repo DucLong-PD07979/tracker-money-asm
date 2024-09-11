@@ -3,8 +3,12 @@ import {
     flexRender,
     getCoreRowModel,
     useReactTable,
+    PaginationState,
+    getPaginationRowModel,
+    getSortedRowModel,
 } from "@tanstack/react-table";
-import { FC, MouseEvent } from "react";
+import { FC, MouseEvent, useState } from "react";
+import { InputText } from "../ui/form/input";
 
 interface TanstackTableProps {
     data: any;
@@ -17,10 +21,20 @@ const TanstackTable: FC<TanstackTableProps> = ({
     columns,
     onClickItem = () => {},
 }) => {
+    const [pagination, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    });
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        onPaginationChange: setPagination,
+        state: {
+            pagination,
+        },
     });
 
     return (
@@ -62,6 +76,59 @@ const TanstackTable: FC<TanstackTableProps> = ({
                     ))}
                 </tbody>
             </table>
+            <div className="pagination-container">
+                <button
+                    className="pagination-button"
+                    onClick={() => table.firstPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    {"<<"}
+                </button>
+                <button
+                    className="pagination-button"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    {"<"}
+                </button>
+                <button
+                    className="pagination-button"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    {">"}
+                </button>
+                <button
+                    className="pagination-button"
+                    onClick={() => table.lastPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    {">>"}
+                </button>
+                <span className="pagination-info">
+                    <div>Page</div>
+                    <strong>
+                        {table.getState().pagination.pageIndex + 1} of{" "}
+                        {table.getPageCount().toLocaleString()}
+                    </strong>
+                </span>
+                <span className="pagination-go">
+                    | Go to page:
+                    <InputText
+                        classNames="pagination-input"
+                        type="number"
+                        min="1"
+                        max={table.getPageCount()}
+                        defaultValue={table.getState().pagination.pageIndex + 1}
+                        onChange={(e) => {
+                            const page = e.target.value
+                                ? Number(e.target.value) - 1
+                                : 0;
+                            table.setPageIndex(page);
+                        }}
+                    />
+                </span>
+            </div>
         </div>
     );
 };
