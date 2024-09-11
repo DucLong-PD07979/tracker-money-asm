@@ -21,7 +21,13 @@ const getIncomeWithFilterOptions = async (req: Request, res: Response) => {
     const userInfor = await getUserInforWithToken(userDecodeFromToken);
 
     const { filterType, duration } = req.query;
-    if (!filterType && !duration) {
+
+    if (filterType === 'all') {
+      const income = await incomeServices.getIncomeWithUserId(userInfor?._id);
+      return res.status(StatusCodes.CREATED).json({ income });
+    }
+
+    if (!filterType || !duration) {
       const income = await incomeServices.getIncomeWithUserId(userInfor?._id);
       return res.status(StatusCodes.CREATED).json({ income });
     }

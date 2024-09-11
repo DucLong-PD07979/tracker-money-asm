@@ -15,9 +15,7 @@ const getIncomeWithUserId = async (id: any) => {
   try {
     const incomeData = await IncomeModel.find({
       user_id: id
-    })
-      .limit(9)
-      .sort({ date: -1 });
+    }).sort({ date: -1 });
     return incomeData;
   } catch (error) {
     console.log(error);
