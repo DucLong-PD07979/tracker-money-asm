@@ -1,12 +1,12 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
 
-import { CLIENT_ID_GOOGLE, CLIENT_SECRET_GOOGLE } from './environment';
+import { CLIENT_ID_GOOGLE, CLIENT_SECRET_GOOGLE, CLIENT_URL, IS_PRODUCTION } from './environment';
 import { checkEmailIsAlreadyExists, generateAccessToken, generateRrefreshToken } from '@/services/authServices';
 import UserModel from '@/models/userModel';
 import IUser from '@/models/guard/userGuard';
 
-if (!CLIENT_ID_GOOGLE || !CLIENT_SECRET_GOOGLE) {
+if (!CLIENT_ID_GOOGLE || !CLIENT_SECRET_GOOGLE || !CLIENT_URL) {
   throw new Error('CLIENT_ID and CLIENT_SECRET must be defined in environment variables');
 }
 
@@ -15,7 +15,9 @@ passport.use(
     {
       clientID: CLIENT_ID_GOOGLE,
       clientSecret: CLIENT_SECRET_GOOGLE,
-      callbackURL: 'http://localhost:3000/api/v1/auth/google/callback',
+      callbackURL: IS_PRODUCTION
+        ? CLIENT_URL + '/api/v1/auth/google/callback'
+        : 'http://localhost:3000/api/v1/auth/google/callback',
       passReqToCallback: true
     },
     async function (_request: any, _accessToken: any, _refreshToken: any, profile: any, done: any) {
