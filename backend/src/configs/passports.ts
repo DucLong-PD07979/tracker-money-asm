@@ -16,7 +16,7 @@ passport.use(
       clientID: CLIENT_ID_GOOGLE,
       clientSecret: CLIENT_SECRET_GOOGLE,
       callbackURL: IS_PRODUCTION
-        ? CLIENT_URL + '/api/v1/auth/google/callback'
+        ? 'https://tracker-money-asm.onrender.com/api/v1/auth/google/callback'
         : 'http://localhost:3000/api/v1/auth/google/callback',
       passReqToCallback: true
     },
