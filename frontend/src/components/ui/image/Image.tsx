@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FC, ImgHTMLAttributes, useState } from "react";
+import { FC, ImgHTMLAttributes, useState } from "react";
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     alt: string;

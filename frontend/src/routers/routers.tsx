@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, ReactElement, ReactNode, Suspense } from "react";
 
 import PageRouters from "@/enum/routers/routers";
 import RootPage from "@/pages/rootPage/RootPage";
@@ -20,7 +20,14 @@ const ROUTER_LAYOUT_DEFAULT = "default";
 const ROUTER_ROLE_PUBLIC = "public";
 const ROUTER_ROLE_PRIVATE = "private";
 
-const routerDataWithLayout = [
+type RouterDataWithLayout = {
+    path: string;
+    element: ReactNode;
+    layout: string;
+    role: string;
+    children?: ReactElement;
+};
+const routerDataWithLayout: RouterDataWithLayout[] = [
     {
         path: PageRouters.HOME_ROOT,
         element: (
@@ -113,7 +120,7 @@ const handleRouterData = () => {
                     pathData.push({
                         path: item.path,
                         element: item.element,
-                        children: item.children,
+                        children: "" || undefined,
                     });
                 } else {
                     pathData.push({
@@ -134,7 +141,7 @@ const handleRouterData = () => {
                     pathData.push({
                         path: item.path,
                         element: item.element,
-                        children: item.children,
+                        children: "" || undefined,
                     });
                 } else {
                     pathData.push({
