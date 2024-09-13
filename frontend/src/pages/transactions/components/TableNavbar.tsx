@@ -3,10 +3,8 @@ import { Popover } from "@/components/popover";
 import { Button } from "@/components/ui";
 import { ArrowDownOnSquareIcon, FunnelFilterIcon } from "@/components/ui/icon";
 import { FC } from "react";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import MyDocument from "@/components/pdf/PDF";
-import { useConfirmDialog } from "@/components/dialog/ConfirmDialogContext";
-import { Dialog } from "@/components/dialog";
 
 interface TableNavbarPropsType {
     setFilterTypeOption: (value: string) => void;

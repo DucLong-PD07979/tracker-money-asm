@@ -3,8 +3,6 @@ import { FC, useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { TanstackTable } from "@/components/table";
 
-import defaultData from "@/components/table/tableRecent.json";
-
 type Budgets = {
     Time: string;
     Feature: string;
@@ -31,7 +29,7 @@ const columns = [
 interface RecentProps {}
 
 const Recent: FC<RecentProps> = () => {
-    const [data, setData] = useState<Budgets[]>(defaultData);
+    const [data] = useState<Budgets[]>([]);
 
     const handleGetDetailsCell = (e: any, cell: any) => {
         console.log(e);

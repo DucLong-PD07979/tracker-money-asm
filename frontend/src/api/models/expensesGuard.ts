@@ -6,4 +6,8 @@ interface ExpensesType {
     description: string;
 }
 
-export type { ExpensesType };
+interface ExpensesTypeUpdate extends ExpensesType {
+    _id: string;
+}
+
+export type { ExpensesType, ExpensesTypeUpdate };

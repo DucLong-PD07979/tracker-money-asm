@@ -16,6 +16,7 @@ import { createColumnHelper, CellContext } from "@tanstack/react-table";
 import { FC, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import FormEditExpenses from "./FormEditExpenses";
+import { ExpensesTypeUpdate } from "@/api/models/expensesGuard";
 
 interface ExpensesTypesss {
     _id: string;
@@ -28,10 +29,10 @@ interface ExpensesTypesss {
 }
 
 const columnHelper = createColumnHelper<ExpensesTypesss>();
-type InfoType = CellContext<ExpensesTypesss, unknown>;
+type InfoType = CellContext<ExpensesTypeUpdate, unknown>;
 
 interface ActionTableHandleProps {
-    data: ExpensesTypesss;
+    data: ExpensesTypeUpdate;
 }
 
 const ActionTableHandle: FC<ActionTableHandleProps> = ({ data }) => {

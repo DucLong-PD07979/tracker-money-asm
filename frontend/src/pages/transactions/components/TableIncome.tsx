@@ -107,6 +107,7 @@ const columns = [
 const TableIncome = () => {
     const [filterTypeOption, setFilterTypeOption] = useState<string>("all");
     const [durationFilter, setDurationFilter] = useState<string>("");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [headerData, setHeaderData] = useState<any>([]);
     const dispatch = useAppDispatch();
     const {
