@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -21,7 +22,12 @@ const styles = StyleSheet.create({
     },
 });
 
-const PDFTable = ({ headers, data }: { headers: string[]; data: any[] }) => (
+interface PDFTableProps {
+    headers: string[];
+    data: Record<string, string | number>[]; 
+}
+
+const PDFTable = ({ headers, data }: PDFTableProps) => (
     <View style={styles.table}>
         <View style={styles.tableRow}>
             {headers.map((header) => (
