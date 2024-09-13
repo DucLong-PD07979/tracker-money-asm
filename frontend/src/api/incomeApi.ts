@@ -3,7 +3,7 @@ import { apiBase } from "@/httpIntercepter_";
 import { IncomeType } from "./models/incomeGuard";
 
 const INCOME_URL: string =
-    process.env.REACT_APP_API_BASE_URL + "/api/v1/income" ||
+    import.meta.env.VITE_API_URL + "/api/v1/income" ||
     "http://localhost:3000/api/v1/income";
 
 const createIncome = async (data: IncomeType): Promise<any> => {

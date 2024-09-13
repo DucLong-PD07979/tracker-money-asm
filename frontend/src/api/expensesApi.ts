@@ -2,7 +2,7 @@
 import { apiBase } from "@/httpIntercepter_";
 
 const EXPENSES_URL: string =
-    process.env.REACT_APP_API_BASE_URL + "/api/v1/expenses" ||
+    import.meta.env.VITE_API_URL + "/api/v1/expenses" ||
     "http://localhost:3000/api/v1/expenses";
 
 const createExpenses = async (expensesPayload: any): Promise<any> => {

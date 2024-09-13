@@ -3,7 +3,7 @@ import { apiBase } from "@/httpIntercepter_";
 import { FormBugetMonth, FormBugetYear } from "./models/budgetsGuard";
 
 const BUDGETS_URL: string =
-    process.env.REACT_APP_API_BASE_URL + "/api/v1/budgets" ||
+    import.meta.env.VITE_API_URL + "/api/v1/budgets" ||
     "http://localhost:3000/api/v1/budgets";
 
 const getBudgetWithUserId = async (): Promise<any> => {

@@ -2,7 +2,7 @@ import { apiBase } from "@/httpIntercepter_";
 import { AuthGuard } from "./models/authGuard";
 
 const AUTH_URL: string =
-    process.env.REACT_APP_API_BASE_URL + "/api/v1/auth" ||
+    import.meta.env.VITE_API_URL + "/api/v1/auth" ||
     "http://localhost:3000/api/v1/auth";
 
 const URL_LOGIN_GOOGLE: string = AUTH_URL + "/google";
