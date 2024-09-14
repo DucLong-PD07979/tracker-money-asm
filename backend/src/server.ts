@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import passport from 'passport';
 import api from './routers/api';
+import { CLIENT_URL } from './configs/environment';
 connectDB();
 
 const app: Application = express();
@@ -13,7 +14,12 @@ app.use(passport.initialize());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true
+  })
+);
 app.use(api);
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');

@@ -165,8 +165,8 @@ const authWithGoogleCallback = (req: Request, res: Response, next: NextFunction)
     }
 
     const { accessToken, refreshToken }: any = user;
-    res.cookie('jwt', accessToken, { httpOnly: false, secure: IS_PRODUCTION });
-    res.cookie('jwt-refresh', refreshToken, { httpOnly: false, secure: IS_PRODUCTION });
+    res.cookie('jwt', accessToken, { httpOnly: false, secure: IS_PRODUCTION, sameSite: 'none' });
+    res.cookie('jwt-refresh', refreshToken, { httpOnly: false, secure: IS_PRODUCTION, sameSite: 'none' });
     res.redirect(`${CLIENT_URL}/profile`);
   })(req, res, next);
 };
