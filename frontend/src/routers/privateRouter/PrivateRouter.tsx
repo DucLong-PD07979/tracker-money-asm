@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch } from "@/hooks";
 import { getUserInfor } from "@/store/authSlice/authSlice";
 import Cookies from "js-cookie";
@@ -37,7 +37,16 @@ const usePrivateRoute = () => {
 };
 
 const PrivateRouter: FC<PrivateRouterProps> = ({ children }) => {
+    const location = useLocation();
     const { isLoading, isError, accessToken, error } = usePrivateRoute();
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const tokenFromUrl = params.get("accessToken");
+
+        if (tokenFromUrl) {
+            Cookies.set("jwt", tokenFromUrl, { expires: 1 });
+        }
+    }, [location]);
 
     if (isLoading) {
         return <DotSpinner />;
