@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch } from "@/hooks";
 import { getUserInfor } from "@/store/authSlice/authSlice";
@@ -12,9 +12,8 @@ interface PrivateRouterProps {
     children: ReactNode;
 }
 
-const usePrivateRoute = () => {
+const usePrivateRoute = (accessToken: string | undefined) => {
     const dispatch = useAppDispatch();
-    const accessToken = Cookies.get("jwt");
 
     const { data, error, isLoading, isError, isSuccess } = useQuery({
         queryKey: ["userInfo"],
@@ -33,18 +32,22 @@ const usePrivateRoute = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data, isSuccess, dispatch, error]);
 
-    return { isLoading, isError, accessToken, error };
+    return { isLoading, isError, error };
 };
 
 const PrivateRouter: FC<PrivateRouterProps> = ({ children }) => {
     const location = useLocation();
-    const { isLoading, isError, accessToken, error } = usePrivateRoute();
+    const [accessToken, setAccessToken] = useState<string | undefined>(
+        Cookies.get("jwt")
+    );
+    const { isLoading, isError, error } = usePrivateRoute(accessToken);
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const tokenFromUrl = params.get("accessToken");
 
         if (tokenFromUrl) {
             Cookies.set("jwt", tokenFromUrl, { expires: 1 });
+            setAccessToken(tokenFromUrl);
         }
     }, [location]);
 
