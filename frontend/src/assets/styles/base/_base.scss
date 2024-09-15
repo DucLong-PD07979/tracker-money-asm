@@ -85,6 +85,10 @@ img {
 
 .section-inner {
     margin-top: 26px;
+
+    @include reponsive(768px) {
+        margin-top: 10px;
+    }
 }
 
 .hide {

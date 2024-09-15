@@ -15,6 +15,12 @@
 
 .header-main.siderbarOpen {
     padding-left: calc($siderbarsMain-width-open);
+
+    @include reponsive(1024px) {
+        & {
+            padding-left: 0;
+        }
+    }
 }
 
 .header-inner {
@@ -28,10 +34,13 @@
 
     .header-logo {
         display: none;
-        @include reponsive(520px) {
+        @include reponsive(1024px) {
             & {
                 display: block;
                 padding-inline: 0;
+                color: $color-first-100;
+                font-weight: 700;
+                font-size: 2rem;
             }
         }
     }

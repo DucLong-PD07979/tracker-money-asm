@@ -11,7 +11,7 @@
 
 .main-content-container.siderBarOpen {
     padding-left: calc($siderbarsMain-width-open);
-    @include reponsive(520px) {
+    @include reponsive(1024px) {
         padding-left: 0;
     }
 }
@@ -19,6 +19,6 @@
 .main-content-inner {
     padding: $padding-global;
     @include reponsive(520px) {
-        padding: 0;
+        padding: $padding-global;
     }
 }

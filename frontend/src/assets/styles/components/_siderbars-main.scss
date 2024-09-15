@@ -6,11 +6,28 @@
     z-index: 9999;
     width: $siderbarsMain-width-open;
     background-color: $color-fourth-90;
-    @include reponsive(520px) {
+
+    @include reponsive(1024px) {
         & {
+            width: 40%;
+            height: 50px;
+            background-color: $color-fourth-90;
+            left: 50%;
+            top: 100%;
+            transform: translate(-50%, -100%);
+        }
+
+        & .btn-toggle-close {
             display: none;
         }
     }
+
+    @include reponsive(768px) {
+        & {
+            width: 100%;
+        }
+    }
+
     .siderbar-inner {
         position: fixed;
         left: 0;
@@ -21,12 +38,31 @@
         width: $siderbarsMain-width-open;
         border-right: 1px solid $borderColor-100;
 
+        @include reponsive(1024px) {
+            & {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                height: 50px;
+                border-right: none;
+                border-top: 1px solid $borderColor-100;
+                background-color: $color-fourth-100;
+                width: 100%;
+            }
+        }
+
         .siderbar-logo {
             position: absolute;
             top: 0;
             left: 0;
             height: $header-main-height;
             width: $siderbarsMain-width-open;
+
+            @include reponsive(1024px) {
+                & {
+                    display: none;
+                }
+            }
 
             .siderbar-logo-wrapper {
                 border-bottom: 1px solid $borderColor-100;
@@ -67,6 +103,22 @@
         .siderbar-nav {
             margin-top: calc($header-main-height + 30px);
 
+            @include reponsive(1024px) {
+                & {
+                    margin-top: 0;
+                }
+            }
+
+            .siderbar-nav__list {
+                @include reponsive(1024px) {
+                    & {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                }
+            }
+
             .siderbar-nav__list-item-link {
                 display: flex;
                 align-items: center;
@@ -84,6 +136,21 @@
                     background-color: $color-hover-100;
                     color: $color-first-100;
                 }
+
+                @include reponsive(1024px) {
+                    & {
+                        margin-top: 0;
+                        width: 100%;
+                    }
+
+                    & > .start-icon {
+                        margin-right: 0;
+                    }
+
+                    & > span {
+                        display: none;
+                    }
+                }
             }
 
             .siderbar-nav__list-item-link.active {
@@ -98,6 +165,12 @@
             width: 100%;
             bottom: 0;
             padding: 12px;
+
+            @include reponsive(1024px) {
+                & {
+                    display: none;
+                }
+            }
 
             .siderbar-footer__link {
                 display: flex;

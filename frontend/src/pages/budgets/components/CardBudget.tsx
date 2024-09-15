@@ -78,7 +78,7 @@ const FormUpdateBudget: FC<FormUpdateBudgetPropsType> = ({
                     <ErrorMess>{errors.amountYear.message}</ErrorMess>
                 )}
             </div>
-            <Grid classNames="grid-cols-4">
+            <Grid classNames="md:grid-cols-4">
                 <Button
                     size="md"
                     icon={<PlusIcon width="14px" height="14px" />}

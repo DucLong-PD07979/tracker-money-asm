@@ -5,8 +5,9 @@ import { Popover } from "@/components/popover";
 import { ArrowLeftCircleIcon, SettingIcon } from "@/components/ui/icon";
 import { authSelector, logoutSuccess } from "@/store/authSlice/authSlice";
 import { logout } from "@/api/authApi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import PageRouters from "@/enum/routers/routers";
 
 const HeaderMenuPopover = () => {
     const { user } = useAppSelector(authSelector);
@@ -67,7 +68,9 @@ const Header = () => {
     return (
         <header className={`header-main ${siderbarOpen ? "siderbarOpen" : ""}`}>
             <div className={`header-inner `}>
-                <div className="header-logo">Tracker money asm</div>
+                <Link to={PageRouters.HOME_PAGE} className="header-logo">
+                    Tracker money asm
+                </Link>
                 <div className="header-user-wrapper"></div>
                 <div className="header-right-wrapper">
                     <Popover content={<HeaderMenuPopover />}>

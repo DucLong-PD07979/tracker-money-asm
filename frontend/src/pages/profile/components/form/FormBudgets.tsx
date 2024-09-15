@@ -167,7 +167,7 @@ const FormCreateBudgetMonth = () => {
             onSubmit={handleSubmit(handleCreateMonthBudget)}
             className="form-year"
         >
-            <Grid classNames="grid-cols-3">
+            <Grid classNames="md:grid-cols-3">
                 <div className="form-flex-cl col-1-2">
                     <label htmlFor="amountMonth">
                         Savings in {monthArr[monthNow].label}
